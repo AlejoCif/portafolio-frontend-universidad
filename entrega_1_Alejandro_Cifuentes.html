@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!-- esta es la declaración del tipo de documento: le indica al navegador que esto es HTML5 -->
+
+<html lang="es">
+ <!-- Etiqueta raíz de la página. lang="es" indica que el idioma es español -->
+
+<head>
+    <!-- HEAD: esta es la sección de configuración de la página, no se ve en el navegador -->
+
+    <!-- Acá Codificación de caracteres: permite usar tildes y ñ correctamente -->
+    <meta charset="UTF-8">
+
+    <!-- Viewport: hace que la página sea adaptativa para otros dispositivos-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la pestaña del navegador -->
+    <title>Portafolio - Alejandro Cifuentes</title>
+
+    <!-- ESTILOS CSS: aquí se define cómo se ve la página donde se ve bonita -->
+    <style>
+
+        /* ESTILOS */
+        /* Se aplican a toda la página */
+        body {
+            font-family: Arial, sans-serif; /* Fuente principal de la página */
+            margin: 0;                      /* Elimina el margen por defecto del navegador */
+            padding: 0;                     /* Elimina el relleno por defecto */
+            background-color: #f5f5f5;      /* Color de fondo gris muy claro */
+            color: #333333;                 /* Color del texto (gris oscuro, más suave que negro) */
+        }
+
+        /* BARRA DE NAVEGACIÓN */
+        /* Barra que aparece en la parte superior con los enlaces del menú */
+        nav {
+            background-color: #2c3e50;      /* Color de fondo azul oscuro */
+            padding: 15px 20px;             /* Espacio interior: 15px arriba/abajo, 20px a los lados */
+            text-align: center;             /* Centra los elementos dentro */
+        }
+
+        /* Estilo de cada enlace dentro del nav */
+        nav a {
+            color: white;                   /* Texto blanco para que se vea sobre el fondo oscuro */
+            text-decoration: none;          /* Quita el subrayado de los enlaces */
+            margin: 0 15px;                 /* Separación entre cada enlace */
+            font-size: 16px;                /* Tamaño del texto */
+        }
+
+        /* Efecto cuando el mouse pasa sobre un enlace del nav */
+        nav a:hover {
+            color: #f39c12;                 /* Cambia a color naranja al pasar el mouse */
+        }
+
+        /* SECCIÓN DE PRESENTACIÓN (HERO o header) */
+        /* Es la primera sección grande con el nombre y foto */
+        #inicio {
+            background-color: #2c3e50;      /* Mismo azul oscuro que el nav */
+            color: white;                   /* Texto blanco */
+            text-align: center;             /* Todo centrado */
+            padding: 50px 20px;             /* Espacio interno generoso */
+        }
+
+        /* Foto de perfil */
+        #inicio img {
+            width: 180px;                   /* Ancho fijo de la foto */
+            height: 180px;                  /* Alto igual al ancho para que sea cuadrada */
+            border-radius: 50%;             /* Hace que la imagen sea circular */
+            object-fit: cover;              /* La imagen llena el espacio sin deformarse */
+            border: 4px solid #f39c12;      /* Borde naranja alrededor de la foto */
+            margin-bottom: 20px;            /* Espacio debajo de la imagen */
+        }
+
+        /* Título principal */
+        #inicio h1 {
+            font-size: 36px;                /* Tamaño grande del nombre */
+            margin: 10px 0;                 /* Espacio arriba y abajo */
+        }
+
+        /* Descripción corta debajo del nombre */
+        #inicio p {
+            font-size: 18px;
+            color: #bdc3c7;                 /* Gris claro para el subtítulo */
+        }
+
+        /* ESTILOS GENERALES DE LAS SECCIONES */
+        /* Cada sección de la página comparte estas propiedades base */
+        section {
+            padding: 40px 20px;             /* Espacio interno de cada sección */
+            max-width: 800px;               /* Ancho máximo para que no se estire demasiado */
+            margin: 0 auto;                 /* Centra el contenido horizontalmente */
+        }
+
+        /* Título de cada sección */
+        section h2 {
+            color: #2c3e50;                 /* Azul oscuro para los títulos de sección */
+            border-bottom: 2px solid #f39c12; /* Línea naranja debajo del título */
+            padding-bottom: 8px;            /* Espacio entre el texto y la línea */
+            margin-bottom: 20px;            /* Espacio debajo del título antes del contenido */
+        }
+
+        /* SECCIÓN SOBRE MÍ */
+        /* Fondo blanco para alternar con el gris de fondo */
+        #sobre-mi {
+            background-color: white;
+            max-width: 100%;                /* Ocupa todo el ancho */
+            padding: 40px 0;
+        }
+
+        /* Contenido centrado dentro de sobre-mí */
+        #sobre-mi .contenido {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* SECCIÓN DE HABILIDADES */
+        #habilidades {
+            background-color: #f5f5f5;      /* Fondo gris claro */
+        }
+
+        /* Contenedor que agrupa las habilidades en fila */
+        .lista-habilidades {
+            display: flex;                  /* Coloca los elementos en fila (horizontal) */
+            flex-wrap: wrap;                /* Si no caben, pasan a la siguiente fila */
+            gap: 10px;                      /* Separación entre cada habilidad */
+        }
+
+        /* Cada habilidad individual (ej: HTML, CSS, etc.) */
+        .habilidad {
+            background-color: #2c3e50;      /* Fondo azul oscuro */
+            color: white;                   /* Texto blanco */
+            padding: 8px 20px;             /* Espacio interno */
+            border-radius: 20px;            /* Bordes redondeados tipo "etiqueta" */
+            font-size: 15px;
+        }
+
+        /* SECCIÓN DE PROYECTOS */
+        #proyectos {
+            background-color: white;
+            max-width: 100%;
+            padding: 40px 0;
+        }
+
+        /* Contenido centrado dentro de proyectos */
+        #proyectos .contenido {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cada tarjeta de proyecto */
+        .proyecto {
+            background-color: #f5f5f5;      /* Fondo gris claro para las tarjetas */
+            border: 1px solid #ddd;         /* Borde gris suave alrededor */
+            border-radius: 8px;             /* Esquinas un poco redondeadas */
+            padding: 20px;                  /* Espacio interno */
+            margin-bottom: 20px;            /* Separación entre proyectos */
+        }
+
+        /* Imagen dentro de cada proyecto */
+        .proyecto img {
+            width: 100%;                    /* Ocupa todo el ancho de la tarjeta */
+            height: 200px;                  /* Altura fija para todas las imágenes */
+            object-fit: cover;              /* La imagen cubre el espacio sin deformarse */
+            border-radius: 5px;             /* Esquinas ligeramente redondeadas */
+            margin-bottom: 10px;            /* Espacio entre imagen y texto */
+        }
+
+        /* Enlace que funciona como botón en cada proyecto */
+        /* Se usa <a> en lugar de <button> para poder abrir una URL al hacer clic */
+        .proyecto a {
+            display: inline-block;          /* Permite aplicar padding como si fuera un bloque */
+            background-color: #f39c12;      /* Fondo naranja */
+            color: white;                   /* Texto blanco */
+            text-decoration: none;          /* Quita el subrayado del enlace */
+            padding: 8px 18px;             /* Espacio interno */
+            border-radius: 5px;             /* Esquinas redondeadas */
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* Efecto al pasar el mouse sobre el enlace-botón */
+        .proyecto a:hover {
+            background-color: #e67e22;      /* Naranja más oscuro al pasar el mouse */
+        }
+
+        /* SECCIÓN DE CONTACTO */
+        #contacto {
+            background-color: #2c3e50;      /* Fondo azul oscuro */
+            color: white;                   /* Texto blanco */
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 100%;
+        }
+
+        /* Título de contacto en blanco */
+        #contacto h2 {
+            color: white;
+            border-bottom: 2px solid #f39c12;
+            display: inline-block;          /* Para que la línea solo mida lo que el texto */
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Cada dato de contacto */
+        #contacto p {
+            font-size: 16px;
+            margin: 8px 0;
+            color: #bdc3c7;                 /* Gris claro */
+        }
+
+        /*  PIE DE PÁGINA (FOOTER) */
+        /* este es el final de la página */
+        footer {
+            background-color: #1a252f;      /* Azul muy oscuro, más oscuro que el nav */
+            color: #bdc3c7;                 /* Texto gris claro */
+            text-align: center;             /* Texto centrado */
+            padding: 15px;                  /* Espacio interno */
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- BODY: aquí va todo el contenido visible de la página -->
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <!-- Menú superior con enlaces que llevan a cada sección de la página -->
+    <!-- Los href="#id" llevan al usuario a la sección con ese id al hacer clic -->
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <!-- SECCIÓN INICIO (PRESENTACIÓN)  -->
+    <!-- Primera sección que ve el user al entrar a la página -->
+    <!-- El id="inicio" permite que el enlace del nav lleve aquí -->
+    <div id="inicio">
+        <!-- Foto de perfil -->
+        <!-- alt describe la imagen para accesibilidad -->
+        <img src="alejandro_cifuentes.jpeg" alt="Foto de perfil de Alejandro Cifuentes">
+
+        <!-- Nombre principal -->
+        <h1>Hola, soy Alejandro Cifuentes</h1>
+
+        <!-- Descripción -->
+        <p>Estudiante de desarrollo web | Apasionado por la tecnología</p>
+    </div>
+
+    <!-- SECCIÓN SOBRE MÍ -->
+    <!-- Información personal -->
+    <center><div id="sobre-mi">
+        <div class="contenido">
+            <h2>Sobre mí</h2>
+            <p>Tengo 37 años y actualmente estudio programación.</p>
+            <p>Me interesa el diseño web y la creación de aplicaciones.</p>
+            <p>Soy estudiante de desarrollo web y me gusta aprender nuevas tecnologías.</p>
+            <p>Actualmente me despeño como programador backend en rappi, estoy encargado del</p>
+            <p>area de Carrito, checkout y pricing, me gusta mucho todo el tema de codigo y programacion</p>
+        </div>
+    </div></center>
+
+    <!-- SECCIÓN HABILIDADES -->
+    <!-- Lista de tecnologías y lenguajes que manejo -->
+    <section id="habilidades">
+        <h2>Mis habilidades</h2>
+
+        <!-- Contenedor de habilidades: cada span es una etiqueta de habilidad -->
+        <div class="lista-habilidades">
+            <span class="habilidad">HTML</span>
+            <span class="habilidad">CSS</span>
+            <span class="habilidad">JavaScript</span>
+            <span class="habilidad">Python</span>
+            <span class="habilidad">Ktolin</span>
+            <span class="habilidad">Java</span>
+            <span class="habilidad">Goland</span>
+        </div>
+    </section>
+
+    <!-- SECCIÓN PROYECTOS -->
+    <!-- Muestra los proyectos realizados -->
+    <div id="proyectos">
+        <div class="contenido">
+            <h2>Mis proyectos</h2>
+
+            <!-- Tarjeta del Proyecto 1 -->
+            <div class="proyecto">
+                <h3>Proyecto 1</h3>
+                <!-- Imagen representativa del proyecto -->
+                <img src="disempack.jpeg" alt="Captura del proyecto Disempack">
+                <!-- Descripción corta del proyecto -->
+                <p>Página web de Disempack</p>
+                <!-- Enlace que abre el proyecto en una pestaña nueva (target="_blank") -->
+                <a href="https://disempack.net/" target="_blank">Ver proyecto</a>
+            </div>
+
+            <!-- Tarjeta del Proyecto 2 -->
+            <div class="proyecto">
+                <h3>Proyecto 2</h3>
+                <img src="asosuperfruver.jpeg" alt="Captura del proyecto Asosuperfruver">
+                <p>Sistema de registro de una coperativs de venta de papa</p>
+                <p>Se maneja intranet con usuario y contraseña para adminisrtrar inventarios y remisiones</p>
+                <!-- Enlace que abre el proyecto en una pestaña nueva -->
+                <a href="https://asosuperfruverune.com/" target="_blank">Ver proyecto</a>
+            </div>
+
+            <!-- Tarjeta del Proyecto 3 -->
+            <div class="proyecto">
+                <h3>Proyecto 3</h3>
+                <img src="telemed.jpeg" alt="Captura del proyecto Telemed">
+                <p>Aplicación para administrar area de medicina y telemedicina en tres paises de Sur America</p>
+                <!-- Enlace que abre el proyecto en una pestaña nueva -->
+                <a href="https://www.telemed-group.cl/" target="_blank">Ver proyecto</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SECCIÓN CONTACTO -->
+    <!-- Información para que los visitantes me pueda contactar -->
+    <div id="contacto">
+        <h2>Contacto</h2>
+        <p>Correo: alejandro.cifuentes.osorio@gmail.com.com</p>
+        <p>Teléfono: 3186903650</p>
+    </div>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <!-- Aparece al final de todas las páginas, con info básica -->
+    <footer>
+        <p>Portafolio personal - 2026</p>
+    </footer>
+
+</body>
+</html>

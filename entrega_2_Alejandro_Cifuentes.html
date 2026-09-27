@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Alejandro Cifuentes</title>
+
+    <!-- Bootstrap 5 CSS (framework CSS tratado en el módulo) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Estilos propios (CSS externo separado del HTML) -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- ===== NAVBAR RESPONSIVE (Bootstrap) ===== -->
+    <nav class="navbar navbar-expand-md fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">AC</a>
+
+            <!-- Botón hamburguesa para móvil -->
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu" aria-expanded="false"
+                aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menú de navegación -->
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sobre-mi">Sobre mí</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== SECCIÓN INICIO / HERO ===== -->
+    <div id="inicio">
+        <div class="container">
+            <img src="alejandro_cifuentes.jpeg"
+                 alt="Foto de perfil de Alejandro Cifuentes"
+                 class="foto-perfil">
+
+            <h1>Hola, soy <span style="color: #f39c12;">Alejandro Cifuentes</span></h1>
+
+            <p class="subtitulo">Desarrollador Backend &middot; Estudiante de Desarrollo Web</p>
+
+            <div>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> Golang</span>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> Kotlin</span>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> Java</span>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> Python</span>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> JavaScript</span>
+            </div>
+
+            <br>
+            <a href="#proyectos" class="btn-hero">
+                <i class="bi bi-eye me-2"></i>Ver mis proyectos
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== SECCIÓN SOBRE MÍ ===== -->
+    <div id="sobre-mi">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="titulo-seccion">Sobre mí</h2>
+                <div class="linea-titulo"></div>
+            </div>
+
+            <div class="row align-items-center g-4">
+                <!-- Texto de presentación -->
+                <div class="col-md-7 fade-in">
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: #555;">
+                        Soy programador backend con experiencia en desarrollo de aplicaciones escalables.
+                        Actualmente trabajo en <strong>Rappi</strong>, donde soy responsable del área de
+                        <strong>Carrito, Checkout y Pricing</strong>. Me apasiona la programación, la arquitectura
+                        de software y la creación de soluciones tecnológicas eficientes.
+                    </p>
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: #555;">
+                        Además de mi rol profesional, estoy cursando estudios en <strong>Desarrollo Web</strong>
+                        para ampliar mis conocimientos hacia el frontend y tener una visión más completa del
+                        desarrollo de software.
+                    </p>
+                </div>
+
+                <!-- Datos personales -->
+                <div class="col-md-5 fade-in">
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-person me-2" style="color:#f39c12;"></i>Nombre:</strong>
+                        <span class="ms-1">Alejandro Cifuentes Osorio</span>
+                    </div>
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-calendar3 me-2" style="color:#f39c12;"></i>Edad:</strong>
+                        <span class="ms-1">37 años</span>
+                    </div>
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-briefcase me-2" style="color:#f39c12;"></i>Empresa:</strong>
+                        <span class="ms-1">Rappi</span>
+                    </div>
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-geo-alt me-2" style="color:#f39c12;"></i>Área:</strong>
+                        <span class="ms-1">Carrito, Checkout y Pricing</span>
+                    </div>
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-mortarboard me-2" style="color:#f39c12;"></i>Estudios:</strong>
+                        <span class="ms-1">Desarrollo Web</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contadores estadísticos -->
+            <div class="row text-center mt-5 g-3">
+                <div class="col-4 fade-in">
+                    <div style="background: #f5f5f5; border-radius: 12px; padding: 20px;">
+                        <div style="font-size: 2rem; font-weight: 700; color: #f39c12;">
+                            <span class="contador" data-valor="7">0</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #888; margin-top: 5px;">Años de experiencia</div>
+                    </div>
+                </div>
+                <div class="col-4 fade-in">
+                    <div style="background: #f5f5f5; border-radius: 12px; padding: 20px;">
+                        <div style="font-size: 2rem; font-weight: 700; color: #f39c12;">
+                            <span class="contador" data-valor="3">0</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #888; margin-top: 5px;">Proyectos destacados</div>
+                    </div>
+                </div>
+                <div class="col-4 fade-in">
+                    <div style="background: #f5f5f5; border-radius: 12px; padding: 20px;">
+                        <div style="font-size: 2rem; font-weight: 700; color: #f39c12;">
+                            <span class="contador" data-valor="5">0</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #888; margin-top: 5px;">Tecnologías dominadas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SECCIÓN HABILIDADES ===== -->
+    <section id="habilidades">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="titulo-seccion">Mis habilidades</h2>
+                <div class="linea-titulo"></div>
+            </div>
+
+            <div class="row g-5">
+                <!-- Barras de progreso -->
+                <div class="col-md-6 fade-in">
+                    <h5 style="color: #2c3e50; font-weight: 600; margin-bottom: 20px;">
+                        <i class="bi bi-bar-chart me-2" style="color:#f39c12;"></i>Nivel de dominio
+                    </h5>
+
+                    <div class="habilidad-item">
+                        <label>
+                            <span>Golang</span>
+                            <span style="color:#f39c12;">90%</span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar" data-width="90" role="progressbar"
+                                 aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="habilidad-item">
+                        <label>
+                            <span>Kotlin / Java</span>
+                            <span style="color:#f39c12;">85%</span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar" data-width="85" role="progressbar"
+                                 aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="habilidad-item">
+                        <label>
+                            <span>Python</span>
+                            <span style="color:#f39c12;">75%</span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar" data-width="75" role="progressbar"
+                                 aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="habilidad-item">
+                        <label>
+                            <span>JavaScript</span>
+                            <span style="color:#f39c12;">65%</span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar" data-width="65" role="progressbar"
+                                 aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="habilidad-item">
+                        <label>
+                            <span>HTML &amp; CSS</span>
+                            <span style="color:#f39c12;">60%</span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar" data-width="60" role="progressbar"
+                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tags de tecnologías -->
+                <div class="col-md-6 fade-in">
+                    <h5 style="color: #2c3e50; font-weight: 600; margin-bottom: 20px;">
+                        <i class="bi bi-tags me-2" style="color:#f39c12;"></i>Tecnologías
+                    </h5>
+                    <div>
+                        <span class="tag-habilidad"><i class="bi bi-filetype-html me-1"></i>HTML5</span>
+                        <span class="tag-habilidad"><i class="bi bi-filetype-css me-1"></i>CSS3</span>
+                        <span class="tag-habilidad"><i class="bi bi-filetype-js me-1"></i>JavaScript</span>
+                        <span class="tag-habilidad">Bootstrap 5</span>
+                        <span class="tag-habilidad"><i class="bi bi-filetype-py me-1"></i>Python</span>
+                        <span class="tag-habilidad">Kotlin</span>
+                        <span class="tag-habilidad">Java</span>
+                        <span class="tag-habilidad">Golang</span>
+                        <span class="tag-habilidad"><i class="bi bi-git me-1"></i>Git</span>
+                        <span class="tag-habilidad"><i class="bi bi-database me-1"></i>SQL</span>
+                        <span class="tag-habilidad">REST APIs</span>
+                        <span class="tag-habilidad"><i class="bi bi-diagram-3 me-1"></i>Microservicios</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN PROYECTOS ===== -->
+    <div id="proyectos">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="titulo-seccion">Mis proyectos</h2>
+                <div class="linea-titulo"></div>
+            </div>
+
+            <!-- Grid de proyectos con Bootstrap (3 columnas en desktop, 1 en móvil) -->
+            <div class="row g-4">
+
+                <!-- Proyecto 1: Disempack -->
+                <div class="col-md-4 fade-in">
+                    <div class="tarjeta-proyecto">
+                        <div class="img-wrapper">
+                            <img src="disempack.jpeg" alt="Captura del sitio web de Disempack">
+                        </div>
+                        <div class="cuerpo">
+                            <h3>Disempack</h3>
+                            <p>
+                                Sitio web corporativo desarrollado para Disempack, empresa del sector
+                                de empaques y embalajes. Diseño limpio y navegación intuitiva.
+                            </p>
+                            <span class="tag-habilidad" style="font-size:0.75rem; padding: 3px 10px; margin-bottom:12px; display:inline-block;">Web</span>
+                            <br>
+                            <a href="https://disempack.net/" target="_blank" rel="noopener" class="btn-proyecto">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>Ver proyecto
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2: Asosuperfruver -->
+                <div class="col-md-4 fade-in">
+                    <div class="tarjeta-proyecto">
+                        <div class="img-wrapper">
+                            <img src="asosuperfruver.jpeg" alt="Captura del sistema Asosuperfruver">
+                        </div>
+                        <div class="cuerpo">
+                            <h3>Asosuperfruver</h3>
+                            <p>
+                                Sistema de registro e inventario para una cooperativa de venta de papa.
+                                Intranet con autenticación para administrar inventarios y remisiones.
+                            </p>
+                            <span class="tag-habilidad" style="font-size:0.75rem; padding: 3px 10px; margin-bottom:12px; display:inline-block;">Intranet</span>
+                            <br>
+                            <a href="https://asosuperfruverune.com/" target="_blank" rel="noopener" class="btn-proyecto">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>Ver proyecto
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3: Telemed -->
+                <div class="col-md-4 fade-in">
+                    <div class="tarjeta-proyecto">
+                        <div class="img-wrapper">
+                            <img src="telemed.jpeg" alt="Captura de la aplicación Telemed">
+                        </div>
+                        <div class="cuerpo">
+                            <h3>Telemed Group</h3>
+                            <p>
+                                Plataforma para administrar servicios de medicina y telemedicina
+                                en tres países de Sudamérica. Gestión de pacientes y consultas remotas.
+                            </p>
+                            <span class="tag-habilidad" style="font-size:0.75rem; padding: 3px 10px; margin-bottom:12px; display:inline-block;">Salud</span>
+                            <br>
+                            <a href="https://www.telemed-group.cl/" target="_blank" rel="noopener" class="btn-proyecto">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>Ver proyecto
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SECCIÓN CONTACTO ===== -->
+    <div id="contacto">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="titulo-seccion">Contacto</h2>
+                <div class="linea-titulo"></div>
+            </div>
+
+            <div class="row g-5 align-items-start">
+
+                <!-- Información de contacto -->
+                <div class="col-md-5 fade-in">
+                    <h5 style="color: #f39c12; margin-bottom: 25px; font-weight: 600;">
+                        ¡Hablemos!
+                    </h5>
+                    <p style="color: #bdc3c7; line-height: 1.7; margin-bottom: 30px;">
+                        ¿Tienes un proyecto en mente o simplemente quieres ponerte en contacto?
+                        Escríbeme y con gusto te respondo.
+                    </p>
+
+                    <div class="info-contacto">
+                        <div class="icono-contacto">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <span>alejandro.cifuentes.osorio@gmail.com</span>
+                    </div>
+
+                    <div class="info-contacto">
+                        <div class="icono-contacto">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+                        <span>+57 318 690 3650</span>
+                    </div>
+
+                    <div class="info-contacto">
+                        <div class="icono-contacto">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <span>Colombia</span>
+                    </div>
+                </div>
+
+                <!-- Formulario de contacto con validación JavaScript -->
+                <div class="col-md-7 fade-in">
+                    <form id="form-contacto" class="form-contacto" novalidate>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" class="form-control"
+                                       placeholder="Tu nombre completo">
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="correo">Correo electrónico</label>
+                                <input type="email" id="correo" class="form-control"
+                                       placeholder="tu@correo.com">
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="asunto">Asunto</label>
+                                <input type="text" id="asunto" class="form-control"
+                                       placeholder="¿De qué quieres hablar?">
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="mensaje">Mensaje</label>
+                                <textarea id="mensaje" class="form-control" rows="4"
+                                          placeholder="Escribe tu mensaje aquí..."></textarea>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn-enviar">
+                                    <i class="bi bi-send me-2"></i>Enviar mensaje
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Alerta de éxito (se muestra con JS) -->
+                        <div id="alerta-exito" class="alerta-exito">
+                            <i class="bi bi-check-circle me-2"></i>
+                            ¡Mensaje enviado con éxito! Pronto me pondré en contacto contigo.
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>Portafolio personal &mdash; <span>Alejandro Cifuentes</span> &copy; 2026</p>
+        <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.6;">
+            Desarrollado con HTML, CSS, JavaScript y Bootstrap 5
+        </p>
+    </footer>
+
+    <!-- ===== BOTÓN VOLVER ARRIBA ===== -->
+    <button id="btn-arriba" aria-label="Volver arriba">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap 5 JS (incluye Popper para componentes interactivos) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript propio (externo) -->
+    <script src="script.js"></script>
+
+</body>
+</html>
