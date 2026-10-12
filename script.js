@@ -86,59 +86,61 @@ btnArriba.addEventListener('click', () => {
 const formulario = document.getElementById('form-contacto');
 const alertaExito = document.getElementById('alerta-exito');
 
-formulario.addEventListener('submit', function (e) {
-    e.preventDefault();
+if (formulario) {
+    formulario.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    let esValido = true;
+        let esValido = true;
 
-    // Validar nombre
-    const nombre = document.getElementById('nombre');
-    if (nombre.value.trim().length < 2) {
-        marcarInvalido(nombre, 'El nombre debe tener al menos 2 caracteres.');
-        esValido = false;
-    } else {
-        marcarValido(nombre);
-    }
+        // Validar nombre
+        const nombre = document.getElementById('nombre');
+        if (nombre.value.trim().length < 2) {
+            marcarInvalido(nombre, 'El nombre debe tener al menos 2 caracteres.');
+            esValido = false;
+        } else {
+            marcarValido(nombre);
+        }
 
-    // Validar correo
-    const correo = document.getElementById('correo');
-    const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexCorreo.test(correo.value.trim())) {
-        marcarInvalido(correo, 'Ingresa un correo electrónico válido.');
-        esValido = false;
-    } else {
-        marcarValido(correo);
-    }
+        // Validar correo
+        const correo = document.getElementById('correo');
+        const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regexCorreo.test(correo.value.trim())) {
+            marcarInvalido(correo, 'Ingresa un correo electrónico válido.');
+            esValido = false;
+        } else {
+            marcarValido(correo);
+        }
 
-    // Validar asunto
-    const asunto = document.getElementById('asunto');
-    if (asunto.value.trim().length < 3) {
-        marcarInvalido(asunto, 'El asunto debe tener al menos 3 caracteres.');
-        esValido = false;
-    } else {
-        marcarValido(asunto);
-    }
+        // Validar asunto
+        const asunto = document.getElementById('asunto');
+        if (asunto.value.trim().length < 3) {
+            marcarInvalido(asunto, 'El asunto debe tener al menos 3 caracteres.');
+            esValido = false;
+        } else {
+            marcarValido(asunto);
+        }
 
-    // Validar mensaje
-    const mensaje = document.getElementById('mensaje');
-    if (mensaje.value.trim().length < 10) {
-        marcarInvalido(mensaje, 'El mensaje debe tener al menos 10 caracteres.');
-        esValido = false;
-    } else {
-        marcarValido(mensaje);
-    }
+        // Validar mensaje
+        const mensaje = document.getElementById('mensaje');
+        if (mensaje.value.trim().length < 10) {
+            marcarInvalido(mensaje, 'El mensaje debe tener al menos 10 caracteres.');
+            esValido = false;
+        } else {
+            marcarValido(mensaje);
+        }
 
-    if (esValido) {
-        alertaExito.style.display = 'block';
-        formulario.reset();
-        document.querySelectorAll('.form-control').forEach(campo => {
-            campo.classList.remove('is-valid');
-        });
-        setTimeout(() => {
-            alertaExito.style.display = 'none';
-        }, 5000);
-    }
-});
+        if (esValido && alertaExito) {
+            alertaExito.style.display = 'block';
+            formulario.reset();
+            document.querySelectorAll('.form-control').forEach(campo => {
+                campo.classList.remove('is-valid');
+            });
+            setTimeout(() => {
+                alertaExito.style.display = 'none';
+            }, 5000);
+        }
+    });
+}
 
 function marcarInvalido(campo, mensaje) {
     campo.classList.remove('is-valid');

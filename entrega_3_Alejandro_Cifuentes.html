@@ -15,46 +15,55 @@
 
     <style>
         /* Modo oscuro */
-        .modo-oscuro {
-            background-color: #0d1117 !important;
-            color: #e6edf3 !important;
+        #app.modo-oscuro {
+            background-color: #0d1117;
+            color: #e6edf3;
         }
-        .modo-oscuro nav {
+        #app.modo-oscuro nav {
             background-color: #010409 !important;
         }
-        .modo-oscuro #sobre-mi,
-        .modo-oscuro #proyectos {
+        #app.modo-oscuro #sobre-mi,
+        #app.modo-oscuro #proyectos {
             background-color: #161b22 !important;
         }
-        .modo-oscuro .tarjeta-dato {
+        #app.modo-oscuro .tarjeta-dato {
             background-color: #21262d;
             border-left-color: #f39c12;
         }
-        .modo-oscuro .tarjeta-dato strong,
-        .modo-oscuro .tarjeta-dato span {
+        #app.modo-oscuro .tarjeta-dato strong,
+        #app.modo-oscuro .tarjeta-dato span {
             color: #e6edf3;
         }
-        .modo-oscuro .tarjeta-proyecto {
+        #app.modo-oscuro .tarjeta-proyecto {
             background-color: #21262d;
             border-color: #30363d;
         }
-        .modo-oscuro .tarjeta-proyecto h3 {
+        #app.modo-oscuro .tarjeta-proyecto h3 {
             color: #e6edf3;
         }
-        .modo-oscuro .tarjeta-proyecto p {
+        #app.modo-oscuro .tarjeta-proyecto p {
             color: #8b949e;
         }
-        .modo-oscuro .titulo-seccion {
+        #app.modo-oscuro .titulo-seccion {
             color: #e6edf3;
         }
-        .modo-oscuro p {
+        #app.modo-oscuro p {
             color: #8b949e !important;
         }
-        .modo-oscuro h5 {
+        #app.modo-oscuro h5 {
             color: #e6edf3 !important;
         }
-        .modo-oscuro section {
+        #app.modo-oscuro section {
             background-color: #0d1117;
+        }
+        #app.modo-oscuro #contacto {
+            background-color: #161b22 !important;
+        }
+        #app.modo-oscuro footer {
+            background-color: #010409 !important;
+        }
+        #app.modo-oscuro #inicio {
+            background: linear-gradient(135deg, #010409 0%, #161b22 100%) !important;
         }
 
         /* Botones de filtro de proyectos */
@@ -85,16 +94,16 @@
             border-color: #f39c12;
             color: #fff;
         }
-        .modo-oscuro .btn-filtro {
+        #app.modo-oscuro .btn-filtro {
             border-color: #8b949e;
             color: #e6edf3;
         }
-        .modo-oscuro .btn-filtro.activo {
+        #app.modo-oscuro .btn-filtro.activo {
             background-color: #f39c12;
             border-color: #f39c12;
             color: #fff;
         }
-        .modo-oscuro .btn-filtro:hover {
+        #app.modo-oscuro .btn-filtro:hover {
             background-color: #30363d;
         }
 
@@ -123,6 +132,14 @@
             background-color: #f39c12 !important;
             transform: translateY(-4px);
             box-shadow: 0 6px 16px rgba(243,156,18,0.35);
+        }
+
+        /* Oculta plantilla Vue antes de montar para evitar parpadeo */
+        [v-cloak] { display: none; }
+
+        /* Wrapper del app Vue cubre toda la pagina */
+        #app {
+            min-height: 100vh;
         }
 
         /* Toggle modo oscuro */
@@ -168,8 +185,8 @@
     </style>
 </head>
 
-<!-- Vue controla todo desde aqui -->
-<body :class="{ 'modo-oscuro': modoOscuro }" id="app">
+<body>
+<div id="app" v-cloak :class="{ 'modo-oscuro': modoOscuro }">
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-md fixed-top">
@@ -516,6 +533,8 @@
         <i class="bi bi-arrow-up"></i>
     </button>
 
+</div><!-- fin #app -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
@@ -671,14 +690,29 @@
             }
         },
 
-        // Ciclo de vida: activar barras de progreso despues de montar
+        // Ciclo de vida: despues de montar, activar barras y registrar fade-in de elementos dinamicos
         mounted() {
+            // Animar barras de progreso generadas por v-for
             const activarBarras = () => {
                 document.querySelectorAll('.progress-bar[data-width]').forEach(b => {
                     b.style.width = b.getAttribute('data-width') + '%';
                 });
             };
             setTimeout(activarBarras, 400);
+
+            // Registrar en el observer los .fade-in que Vue renderizo dinamicamente
+            const observerFade = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observerFade.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.15 }
+            );
+            document.querySelectorAll('.fade-in').forEach(el => observerFade.observe(el));
         }
 
     }).mount('#app');
