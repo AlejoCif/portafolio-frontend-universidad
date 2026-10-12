@@ -14,7 +14,13 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.prod.js"></script>
 
     <style>
-        /* Modo oscuro */
+        /*
+         * MODO OSCURO
+         * Estas reglas se activan cuando Vue agrega la clase "modo-oscuro" al div#app.
+         * El toggle lo maneja la directiva :class="{ 'modo-oscuro': modoOscuro }" en el HTML.
+         * Se usan selectores con prefijo #app para que solo afecten a la app Vue
+         * y no interfieran con estilos externos de Bootstrap.
+         */
         #app.modo-oscuro {
             background-color: #0d1117;
             color: #e6edf3;
@@ -66,7 +72,12 @@
             background: linear-gradient(135deg, #010409 0%, #161b22 100%) !important;
         }
 
-        /* Botones de filtro de proyectos */
+        /*
+         * BOTONES DE FILTRO DE PROYECTOS
+         * Vue genera estos botones con v-for sobre el array "categorias".
+         * La clase "activo" se aplica dinamicamente con :class="{ activo: filtroActivo === cat }",
+         * lo que resalta el boton de la categoria seleccionada en ese momento.
+         */
         .filtros-proyecto {
             display: flex;
             gap: 10px;
@@ -107,7 +118,12 @@
             background-color: #30363d;
         }
 
-        /* Animacion entrada tarjetas */
+        /*
+         * ANIMACION DE ENTRADA DE TARJETAS DE PROYECTOS
+         * Cada vez que el filtro cambia, Vue vuelve a renderizar las tarjetas
+         * con v-for. Al re-entrar al DOM reciben esta clase y ejecutan la animacion
+         * de deslizamiento hacia arriba.
+         */
         .tarjeta-animada {
             animation: entradaTarjeta 0.35s ease both;
         }
@@ -116,7 +132,12 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Contador de caracteres */
+        /*
+         * CONTADOR DE CARACTERES DEL TEXTAREA
+         * Vue actualiza este numero en tiempo real gracias a la interpolacion
+         * {{ form.mensaje.length }}. Cuando supera 450 caracteres, Vue agrega
+         * la clase "limite" via :class para cambiar el color a rojo.
+         */
         .char-contador {
             font-size: 0.75rem;
             text-align: right;
@@ -127,22 +148,39 @@
             color: #e74c3c;
         }
 
-        /* Tag habilidad seleccionado */
+        /*
+         * ESTADO VISUAL DEL TAG SELECCIONADO
+         * Cuando el usuario hace clic en un tag de tecnologia, Vue llama a
+         * seleccionarTag() y actualiza tagSeleccionado. La directiva
+         * :class="{ seleccionado: tagSeleccionado === tag }" aplica esta clase
+         * al tag activo para resaltarlo visualmente.
+         */
         .tag-habilidad.seleccionado {
             background-color: #f39c12 !important;
             transform: translateY(-4px);
             box-shadow: 0 6px 16px rgba(243,156,18,0.35);
         }
 
-        /* Oculta plantilla Vue antes de montar para evitar parpadeo */
+        /*
+         * PREVENCION DE FLASH DE CONTENIDO SIN COMPILAR (FOUC)
+         * v-cloak oculta el div#app mientras Vue no ha terminado de montar.
+         * Vue elimina automaticamente el atributo v-cloak cuando termina,
+         * lo que hace visible el contenido ya procesado.
+         */
         [v-cloak] { display: none; }
 
-        /* Wrapper del app Vue cubre toda la pagina */
+        /* El div#app debe cubrir toda la altura de la pagina para que
+           el fondo del modo oscuro no deje areas sin color. */
         #app {
             min-height: 100vh;
         }
 
-        /* Toggle modo oscuro */
+        /*
+         * BOTON TOGGLE DE MODO OSCURO (navbar)
+         * Su icono y texto cambian reactivamente con Vue:
+         *   :class="modoOscuro ? 'bi bi-sun' : 'bi bi-moon'"
+         *   {{ modoOscuro ? 'Claro' : 'Oscuro' }}
+         */
         .btn-modo {
             background: none;
             border: 1px solid rgba(255,255,255,0.3);
@@ -160,7 +198,13 @@
             background-color: rgba(255,255,255,0.1);
         }
 
-        /* Errores vue formulario */
+        /*
+         * ESTILOS DE VALIDACION DEL FORMULARIO
+         * Vue aplica input-error o input-ok a cada campo usando
+         * :class="{ 'input-error': errores.campo, 'input-ok': validado.campo }".
+         * Los objetos errores y validado se actualizan en el metodo validarCampo()
+         * que se llama con @blur (al salir del campo) y al enviar el formulario.
+         */
         .error-vue {
             font-size: 0.78rem;
             color: #e74c3c;
@@ -175,7 +219,8 @@
             box-shadow: 0 0 0 3px rgba(39,174,96,0.12) !important;
         }
 
-        /* Sin resultados */
+        /* Mensaje de "sin resultados" cuando la propiedad computada
+           proyectosFiltrados devuelve un array vacio. */
         .sin-resultados {
             text-align: center;
             padding: 40px;
@@ -186,9 +231,21 @@
 </head>
 
 <body>
+<!--
+    PUNTO DE MONTAJE DE VUE
+    Todo el contenido del portafolio vive dentro de este div.
+    Vue 3 se monta aqui con createApp({...}).mount('#app').
+    La directiva :class aplica o quita "modo-oscuro" segun el estado de modoOscuro,
+    y v-cloak oculta el div hasta que Vue termina de compilar la plantilla.
+-->
 <div id="app" v-cloak :class="{ 'modo-oscuro': modoOscuro }">
 
-    <!-- NAVBAR -->
+    <!--
+        NAVBAR — Bootstrap + Vue
+        El boton de modo oscuro usa @click para alternar modoOscuro entre true/false.
+        El icono y el texto cambian reactivamente con :class e interpolacion {{ }}.
+        Bootstrap maneja el menu hamburguesa en pantallas pequeñas.
+    -->
     <nav class="navbar navbar-expand-md fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#inicio">AC</a>
@@ -218,7 +275,7 @@
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- HERO — seccion de presentacion, sin directivas Vue especiales -->
     <div id="inicio">
         <div class="container">
             <img src="alejandro_cifuentes.jpeg"
@@ -240,7 +297,13 @@
         </div>
     </div>
 
-    <!-- SOBRE MI -->
+    <!--
+        SOBRE MI
+        Los contadores de estadisticas (anos, proyectos, tecnologias) se renderizan
+        con v-for sobre el array "stats" definido en data(). Cada objeto tiene
+        { valor, etiqueta } que se muestran con interpolacion {{ }}.
+        No se necesita HTML repetido: agregar un objeto al array crea una tarjeta nueva.
+    -->
     <div id="sobre-mi">
         <div class="container">
             <div class="text-center fade-in">
@@ -301,7 +364,19 @@
         </div>
     </div>
 
-    <!-- HABILIDADES -->
+    <!--
+        HABILIDADES
+        Columna izquierda: barras de progreso generadas con v-for sobre "habilidades".
+          El porcentaje se pasa como :data-width para que el hook mounted() lo lea
+          y lo aplique como width del elemento, produciendo la animacion de llenado.
+
+        Columna derecha: tags interactivos generados con v-for sobre "tags".
+          Al hacer clic se llama seleccionarTag(tag), que actualiza tagSeleccionado.
+          La clase "seleccionado" se activa con :class="{ seleccionado: tagSeleccionado === tag }".
+          El panel de descripcion usa v-if="tagSeleccionado" para mostrarse solo
+          cuando hay un tag activo, y {{ descripcionTag(tagSeleccionado) }} muestra
+          el texto del metodo correspondiente.
+    -->
     <section id="habilidades">
         <div class="container">
             <div class="text-center fade-in">
@@ -359,7 +434,16 @@
         </div>
     </section>
 
-    <!-- PROYECTOS con filtro Vue -->
+    <!--
+        PROYECTOS — filtro reactivo con propiedad computada
+        Los botones de categoria se generan con v-for sobre "categorias".
+        Al hacer clic en uno, @click actualiza filtroActivo con la categoria elegida.
+        Las tarjetas se generan con v-for sobre "proyectosFiltrados", que es una
+        propiedad computed: Vue la recalcula automaticamente cada vez que filtroActivo
+        cambia, mostrando solo los proyectos cuya categoria coincide.
+        Si el resultado es vacio, v-if="proyectosFiltrados.length === 0" muestra
+        el mensaje de "sin resultados".
+    -->
     <div id="proyectos">
         <div class="container">
             <div class="text-center fade-in">
@@ -413,7 +497,19 @@
         </div>
     </div>
 
-    <!-- CONTACTO con formulario Vue -->
+    <!--
+        CONTACTO — formulario manejado completamente por Vue
+        Cada campo usa v-model para sincronizacion bidireccional con form.nombre,
+        form.correo, form.asunto y form.mensaje en data().
+        Al salir de un campo (@blur) se llama validarCampo('campo') que escribe
+        en los objetos errores o validado segun el resultado.
+        :class aplica input-error o input-ok al campo segun esos objetos.
+        v-if="errores.campo" muestra u oculta el mensaje de error debajo del campo.
+        El textarea tiene {{ form.mensaje.length }} para el contador en tiempo real.
+        @submit.prevent="enviarFormulario" intercepta el submit del navegador y
+        ejecuta la validacion completa; si pasa, simula el envio con un setTimeout
+        y luego activa enviado=true para mostrar la alerta de exito con v-if.
+    -->
     <div id="contacto">
         <div class="container">
             <div class="text-center fade-in">
@@ -539,22 +635,36 @@
     <script src="script.js"></script>
 
     <script>
+    /*
+     * APLICACION VUE 3
+     * Se usa la API de opciones (Options API) con createApp().
+     * El objeto de configuracion tiene cuatro secciones principales:
+     *   data()    — estado reactivo: cualquier cambio aqui actualiza el DOM automaticamente
+     *   computed  — propiedades derivadas que Vue recalcula cuando sus dependencias cambian
+     *   methods   — funciones que responden a eventos del usuario o del ciclo de vida
+     *   mounted() — hook que se ejecuta una vez que Vue termina de insertar el DOM
+     */
     const { createApp } = Vue;
 
     createApp({
+        /*
+         * data() — estado reactivo de la aplicacion
+         * Todas las variables declaradas aqui son observadas por Vue.
+         * Cuando se modifican, Vue actualiza automaticamente el HTML que las usa.
+         */
         data() {
             return {
-                // Modo oscuro
+                // Controla si el tema oscuro esta activo; lo alterna el boton de la navbar
                 modoOscuro: false,
 
-                // Estadisticas
+                // Datos de los contadores de la seccion "Sobre mi", renderizados con v-for
                 stats: [
                     { valor: 7,  etiqueta: 'Años de experiencia' },
                     { valor: 3,  etiqueta: 'Proyectos destacados' },
                     { valor: 5,  etiqueta: 'Tecnologías dominadas' }
                 ],
 
-                // Habilidades con barras de progreso
+                // Lista de habilidades tecnicas; v-for genera una barra de progreso por cada objeto
                 habilidades: [
                     { nombre: 'Golang',       nivel: 90 },
                     { nombre: 'Kotlin / Java', nivel: 85 },
@@ -563,13 +673,16 @@
                     { nombre: 'HTML & CSS',    nivel: 60 }
                 ],
 
-                // Tags de tecnologias
+                // Array de tecnologias renderizado con v-for como tags clicables
                 tags: ['HTML5','CSS3','JavaScript','Vue.js','Bootstrap 5','Python','Kotlin','Java','Golang','Git','SQL','REST APIs','Microservicios'],
+                // Guarda el tag actualmente seleccionado; null significa ninguno seleccionado
                 tagSeleccionado: null,
 
-                // Proyectos
+                // Categorias de proyectos para los botones de filtro (v-for)
                 categorias: ['Todos', 'Web', 'Intranet', 'Salud'],
+                // Categoria actualmente activa; la propiedad computed proyectosFiltrados depende de esta
                 filtroActivo: 'Todos',
+                // Lista completa de proyectos; la computed filtra sobre este array segun filtroActivo
                 proyectos: [
                     {
                         id: 1,
@@ -597,35 +710,48 @@
                     }
                 ],
 
-                // Formulario de contacto
+                // Campos del formulario enlazados con v-model; se actualizan al escribir
                 form: {
                     nombre:  '',
                     correo:  '',
                     asunto:  '',
                     mensaje: ''
                 },
+                // errores acumula mensajes de validacion por campo; v-if los muestra en el HTML
                 errores:  {},
+                // validado registra los campos que pasaron la validacion para aplicar input-ok
                 validado: {},
+                // enviando bloquea el boton mientras se simula el envio (setTimeout)
                 enviando: false,
+                // enviado muestra la alerta de exito; se resetea a false despues de 5 segundos
                 enviado:  false
             };
         },
 
-        // Propiedad computada: filtra proyectos segun la categoria activa
+        /*
+         * computed — propiedades derivadas del estado
+         * Vue las recalcula automaticamente cuando cambia alguna variable de la que dependen.
+         * No hace falta llamarlas manualmente; el HTML las usa como si fueran datos normales.
+         */
         computed: {
+            // Devuelve el subconjunto de proyectos que coincide con filtroActivo.
+            // Se recalcula cada vez que el usuario cambia la categoria seleccionada.
             proyectosFiltrados() {
                 if (this.filtroActivo === 'Todos') return this.proyectos;
                 return this.proyectos.filter(p => p.categoria === this.filtroActivo);
             }
         },
 
+        /*
+         * methods — funciones que responden a eventos del usuario (@click, @blur, @submit)
+         */
         methods: {
-            // Seleccionar un tag de tecnologia
+            // Activa o desactiva un tag: si ya estaba seleccionado lo deselecciona (toggle)
             seleccionarTag(tag) {
                 this.tagSeleccionado = this.tagSeleccionado === tag ? null : tag;
             },
 
-            // Descripcion de cada tecnologia al seleccionarla
+            // Retorna la descripcion de la tecnologia seleccionada para mostrarla en el panel
             descripcionTag(tag) {
                 const desc = {
                     'HTML5':         'Lenguaje de marcado para estructurar el contenido web.',
@@ -645,7 +771,9 @@
                 return desc[tag] || '';
             },
 
-            // Validacion de un campo individual al perder el foco
+            // Valida un campo cuando el usuario sale de el (@blur).
+            // Escribe en errores si falla o en validado si pasa, y Vue actualiza
+            // la clase del input y el mensaje de error en tiempo real.
             validarCampo(campo) {
                 const valor = this.form[campo].trim();
                 delete this.errores[campo];
@@ -673,7 +801,9 @@
                 this.validado = { ...this.validado };
             },
 
-            // Envio del formulario
+            // Llamado por @submit.prevent en el form. Valida todos los campos primero;
+            // si hay errores se detiene. Si todo esta bien, activa el estado "enviando"
+            // (que deshabilita el boton), y despues de 1.2s simula el envio exitoso.
             enviarFormulario() {
                 ['nombre','correo','asunto','mensaje'].forEach(c => this.validarCampo(c));
                 if (Object.keys(this.errores).length > 0) return;
@@ -690,9 +820,16 @@
             }
         },
 
-        // Ciclo de vida: despues de montar, activar barras y registrar fade-in de elementos dinamicos
+        /*
+         * mounted() — hook de ciclo de vida
+         * Vue lo ejecuta una sola vez, justo despues de insertar el HTML en el DOM.
+         * Es el momento correcto para manipular elementos que Vue acaba de crear con v-for,
+         * ya que antes de este punto esos elementos no existen en el DOM.
+         */
         mounted() {
-            // Animar barras de progreso generadas por v-for
+            // Las barras de progreso las genero Vue con v-for, asi que script.js no las
+            // encontro al cargar. Aqui leemos data-width de cada barra y aplicamos el width
+            // para producir la animacion de llenado que define styles.css.
             const activarBarras = () => {
                 document.querySelectorAll('.progress-bar[data-width]').forEach(b => {
                     b.style.width = b.getAttribute('data-width') + '%';
@@ -700,7 +837,9 @@
             };
             setTimeout(activarBarras, 400);
 
-            // Registrar en el observer los .fade-in que Vue renderizo dinamicamente
+            // script.js corre antes de que Vue monte, por lo que su IntersectionObserver
+            // para fade-in no captura los elementos generados con v-for.
+            // Aqui creamos un nuevo observer que los registra ya con el DOM completo.
             const observerFade = new IntersectionObserver(
                 (entries) => {
                     entries.forEach(entry => {
