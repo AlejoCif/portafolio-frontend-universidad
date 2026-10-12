@@ -13,6 +13,7 @@ frontend/
 |
 |-- entrega_1_Alejandro_Cifuentes.html
 |-- entrega_2_Alejandro_Cifuentes.html
+|-- entrega_3_Alejandro_Cifuentes.html
 |-- styles.css
 |-- script.js
 |-- alejandro_cifuentes.jpeg
@@ -95,9 +96,33 @@ Tecnologias usadas:
 
 ---
 
-## Entrega final - Semana 7
+## Entrega 3 - Semana 7 - Vue.js
+
+Mejora del portafolio personal incorporando Vue.js 3 como framework de frontend.
+
+Archivo: `entrega_3_Alejandro_Cifuentes.html`
+
+Funcionalidades agregadas con Vue:
+
+- Modo oscuro/claro: boton en la barra de navegacion que alterna el tema usando `:class="{ 'modo-oscuro': modoOscuro }"` sobre el body
+- Estadisticas reactivas: los contadores (anos de experiencia, proyectos, tecnologias) se renderizan con `v-for` sobre un array de datos
+- Habilidades con barra de progreso: lista generada con `v-for`, el ancho de cada barra se asigna dinamicamente con `:style`
+- Tags interactivos: al hacer clic en una tecnologia se muestra un panel con descripcion usando `v-if` y `v-show`
+- Filtro de proyectos: botones de categoria filtran la grilla usando una propiedad computada `proyectosFiltrados()` y `v-for` sobre el resultado
+- Formulario con v-model: todos los campos del formulario de contacto usan `v-model` para enlace bidireccional
+- Validacion reactiva: errores se muestran con `v-if` al perder foco (`@blur`) en cada campo, con indicadores visuales por clase
+- Contador de caracteres: el textarea del mensaje muestra `{{ form.mensaje.length }} / 500` en tiempo real
+- Mensaje de exito: al enviar el formulario aparece un panel de confirmacion con `v-if="enviado"`
+- Hook `mounted()`: activa las barras de progreso una vez que Vue termina de montar el componente
+
+Tecnologias: HTML5, CSS3, JavaScript ES6, Bootstrap 5.3.2, Bootstrap Icons 1.11.3, Vue.js 3.4.21 (todos via CDN).
+
+---
+
+## Entrega final - Semana 7 - BOCA
 
 Mejora de la interfaz del software BOCA (Online Contest Administrator), implementada en dos partes: paginas standalone para visualizacion sin servidor, y la integracion real dentro del codigo fuente de Boca corriendo en Ubuntu 25.10 sobre VirtualBox.
+
 
 ### Parte 1 - Paginas standalone (carpeta boca-mejoras/)
 

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Alejandro Cifuentes</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Vue 3 via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.prod.js"></script>
+
+    <style>
+        /* Modo oscuro */
+        .modo-oscuro {
+            background-color: #0d1117 !important;
+            color: #e6edf3 !important;
+        }
+        .modo-oscuro nav {
+            background-color: #010409 !important;
+        }
+        .modo-oscuro #sobre-mi,
+        .modo-oscuro #proyectos {
+            background-color: #161b22 !important;
+        }
+        .modo-oscuro .tarjeta-dato {
+            background-color: #21262d;
+            border-left-color: #f39c12;
+        }
+        .modo-oscuro .tarjeta-dato strong,
+        .modo-oscuro .tarjeta-dato span {
+            color: #e6edf3;
+        }
+        .modo-oscuro .tarjeta-proyecto {
+            background-color: #21262d;
+            border-color: #30363d;
+        }
+        .modo-oscuro .tarjeta-proyecto h3 {
+            color: #e6edf3;
+        }
+        .modo-oscuro .tarjeta-proyecto p {
+            color: #8b949e;
+        }
+        .modo-oscuro .titulo-seccion {
+            color: #e6edf3;
+        }
+        .modo-oscuro p {
+            color: #8b949e !important;
+        }
+        .modo-oscuro h5 {
+            color: #e6edf3 !important;
+        }
+        .modo-oscuro section {
+            background-color: #0d1117;
+        }
+
+        /* Botones de filtro de proyectos */
+        .filtros-proyecto {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .btn-filtro {
+            padding: 6px 20px;
+            border-radius: 20px;
+            border: 2px solid #2c3e50;
+            background: transparent;
+            color: #2c3e50;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-filtro:hover {
+            background-color: #2c3e50;
+            color: #fff;
+        }
+        .btn-filtro.activo {
+            background-color: #f39c12;
+            border-color: #f39c12;
+            color: #fff;
+        }
+        .modo-oscuro .btn-filtro {
+            border-color: #8b949e;
+            color: #e6edf3;
+        }
+        .modo-oscuro .btn-filtro.activo {
+            background-color: #f39c12;
+            border-color: #f39c12;
+            color: #fff;
+        }
+        .modo-oscuro .btn-filtro:hover {
+            background-color: #30363d;
+        }
+
+        /* Animacion entrada tarjetas */
+        .tarjeta-animada {
+            animation: entradaTarjeta 0.35s ease both;
+        }
+        @keyframes entradaTarjeta {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Contador de caracteres */
+        .char-contador {
+            font-size: 0.75rem;
+            text-align: right;
+            margin-top: 3px;
+            color: #888;
+        }
+        .char-contador.limite {
+            color: #e74c3c;
+        }
+
+        /* Tag habilidad seleccionado */
+        .tag-habilidad.seleccionado {
+            background-color: #f39c12 !important;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(243,156,18,0.35);
+        }
+
+        /* Toggle modo oscuro */
+        .btn-modo {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-modo:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Errores vue formulario */
+        .error-vue {
+            font-size: 0.78rem;
+            color: #e74c3c;
+            margin-top: 4px;
+        }
+        .input-error {
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 0 3px rgba(231,76,60,0.12) !important;
+        }
+        .input-ok {
+            border-color: #27ae60 !important;
+            box-shadow: 0 0 0 3px rgba(39,174,96,0.12) !important;
+        }
+
+        /* Sin resultados */
+        .sin-resultados {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<!-- Vue controla todo desde aqui -->
+<body :class="{ 'modo-oscuro': modoOscuro }" id="app">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">AC</a>
+
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sobre-mi">Sobre mí</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                    <!-- Boton modo oscuro controlado por Vue -->
+                    <li class="nav-item ms-2">
+                        <button class="btn-modo" @click="modoOscuro = !modoOscuro">
+                            <i :class="modoOscuro ? 'bi bi-sun' : 'bi bi-moon'"></i>
+                            {{ modoOscuro ? 'Claro' : 'Oscuro' }}
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div id="inicio">
+        <div class="container">
+            <img src="alejandro_cifuentes.jpeg"
+                 alt="Foto de perfil de Alejandro Cifuentes"
+                 class="foto-perfil">
+            <h1>Hola, soy <span style="color: #f39c12;">Alejandro Cifuentes</span></h1>
+            <p class="subtitulo">Desarrollador Backend &middot; Estudiante de Desarrollo Web</p>
+            <div>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> Golang</span>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> Kotlin</span>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> Java</span>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> Python</span>
+                <span class="badge-tech"><i class="bi bi-code-slash"></i> Vue.js</span>
+            </div>
+            <br>
+            <a href="#proyectos" class="btn-hero">
+                <i class="bi bi-eye me-2"></i>Ver mis proyectos
+            </a>
+        </div>
+    </div>
+
+    <!-- SOBRE MI -->
+    <div id="sobre-mi">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="titulo-seccion">Sobre mí</h2>
+                <div class="linea-titulo"></div>
+            </div>
+            <div class="row align-items-center g-4">
+                <div class="col-md-7 fade-in">
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: #555;">
+                        Soy programador backend con experiencia en desarrollo de aplicaciones escalables.
+                        Actualmente trabajo en <strong>Rappi</strong>, donde soy responsable del área de
+                        <strong>Carrito, Checkout y Pricing</strong>. Me apasiona la programación, la arquitectura
+                        de software y la creación de soluciones tecnológicas eficientes.
+                    </p>
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: #555;">
+                        Además de mi rol profesional, estoy cursando estudios en <strong>Desarrollo Web</strong>
+                        para ampliar mis conocimientos hacia el frontend y tener una visión más completa del
+                        desarrollo de software.
+                    </p>
+                </div>
+                <div class="col-md-5 fade-in">
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-person me-2" style="color:#f39c12;"></i>Nombre:</strong>
+                        <span class="ms-1">Alejandro Cifuentes Osorio</span>
+                    </div>
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-calendar3 me-2" style="color:#f39c12;"></i>Edad:</strong>
+                        <span class="ms-1">37 años</span>
+                    </div>
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-briefcase me-2" style="color:#f39c12;"></i>Empresa:</strong>
+                        <span class="ms-1">Rappi</span>
+                    </div>
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-geo-alt me-2" style="color:#f39c12;"></i>Área:</strong>
+                        <span class="ms-1">Carrito, Checkout y Pricing</span>
+                    </div>
+                    <div class="tarjeta-dato">
+                        <strong><i class="bi bi-mortarboard me-2" style="color:#f39c12;"></i>Estudios:</strong>
+                        <span class="ms-1">Desarrollo Web</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contadores Vue reactivos -->
+            <div class="row text-center mt-5 g-3">
+                <div class="col-4 fade-in" v-for="stat in stats" :key="stat.etiqueta">
+                    <div style="background: #f5f5f5; border-radius: 12px; padding: 20px;">
+                        <div style="font-size: 2rem; font-weight: 700; color: #f39c12;">
+                            {{ stat.valor }}+
+                        </div>
+                        <div style="font-size: 0.85rem; color: #888; margin-top: 5px;">
+                            {{ stat.etiqueta }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HABILIDADES -->
+    <section id="habilidades">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="titulo-seccion">Mis habilidades</h2>
+                <div class="linea-titulo"></div>
+            </div>
+            <div class="row g-5">
+                <div class="col-md-6 fade-in">
+                    <h5 style="color: #2c3e50; font-weight: 600; margin-bottom: 20px;">
+                        <i class="bi bi-bar-chart me-2" style="color:#f39c12;"></i>Nivel de dominio
+                    </h5>
+                    <div class="habilidad-item" v-for="h in habilidades" :key="h.nombre">
+                        <label>
+                            <span>{{ h.nombre }}</span>
+                            <span style="color:#f39c12;">{{ h.nivel }}%</span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar" :data-width="h.nivel"
+                                 role="progressbar"
+                                 :aria-valuenow="h.nivel"
+                                 aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tags interactivos: click para resaltar -->
+                <div class="col-md-6 fade-in">
+                    <h5 style="color: #2c3e50; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-tags me-2" style="color:#f39c12;"></i>Tecnologías
+                    </h5>
+                    <p style="font-size: 0.8rem; color: #888; margin-bottom: 14px;">
+                        Haz clic en una tecnología para destacarla
+                    </p>
+                    <div>
+                        <span
+                            v-for="tag in tags"
+                            :key="tag"
+                            class="tag-habilidad"
+                            :class="{ seleccionado: tagSeleccionado === tag }"
+                            @click="seleccionarTag(tag)"
+                            style="cursor: pointer;">
+                            {{ tag }}
+                        </span>
+                    </div>
+                    <!-- Info del tag seleccionado -->
+                    <div v-if="tagSeleccionado" style="margin-top: 18px; padding: 14px 18px; background: rgba(243,156,18,0.08); border-left: 3px solid #f39c12; border-radius: 0 8px 8px 0;">
+                        <strong style="color: #f39c12;">{{ tagSeleccionado }}</strong>
+                        <p style="margin: 4px 0 0; font-size: 0.85rem; color: #555;">
+                            {{ descripcionTag(tagSeleccionado) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYECTOS con filtro Vue -->
+    <div id="proyectos">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="titulo-seccion">Mis proyectos</h2>
+                <div class="linea-titulo"></div>
+            </div>
+
+            <!-- Botones de filtro controlados por Vue -->
+            <div class="filtros-proyecto fade-in">
+                <button
+                    v-for="cat in categorias"
+                    :key="cat"
+                    class="btn-filtro"
+                    :class="{ activo: filtroActivo === cat }"
+                    @click="filtroActivo = cat">
+                    {{ cat }}
+                </button>
+            </div>
+
+            <!-- Tarjetas renderizadas con v-for sobre proyectosFiltrados (computed) -->
+            <div class="row g-4">
+                <div
+                    v-for="proyecto in proyectosFiltrados"
+                    :key="proyecto.id"
+                    class="col-md-4 tarjeta-animada">
+                    <div class="tarjeta-proyecto">
+                        <div class="img-wrapper">
+                            <img :src="proyecto.imagen" :alt="'Captura de ' + proyecto.nombre">
+                        </div>
+                        <div class="cuerpo">
+                            <h3>{{ proyecto.nombre }}</h3>
+                            <p>{{ proyecto.descripcion }}</p>
+                            <span class="tag-habilidad"
+                                  style="font-size:0.75rem; padding:3px 10px; margin-bottom:12px; display:inline-block;">
+                                {{ proyecto.categoria }}
+                            </span>
+                            <br>
+                            <a :href="proyecto.url" target="_blank" rel="noopener" class="btn-proyecto">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>Ver proyecto
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensaje si no hay resultados -->
+                <div v-if="proyectosFiltrados.length === 0" class="sin-resultados">
+                    <i class="bi bi-search" style="font-size: 2rem; color: #ccc;"></i>
+                    <p style="margin-top: 10px;">No hay proyectos en esta categoría.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACTO con formulario Vue -->
+    <div id="contacto">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 class="titulo-seccion">Contacto</h2>
+                <div class="linea-titulo"></div>
+            </div>
+            <div class="row g-5 align-items-start">
+
+                <div class="col-md-5 fade-in">
+                    <h5 style="color: #f39c12; margin-bottom: 25px; font-weight: 600;">¡Hablemos!</h5>
+                    <p style="color: #bdc3c7; line-height: 1.7; margin-bottom: 30px;">
+                        ¿Tienes un proyecto en mente o simplemente quieres ponerte en contacto?
+                        Escríbeme y con gusto te respondo.
+                    </p>
+                    <div class="info-contacto">
+                        <div class="icono-contacto"><i class="bi bi-envelope"></i></div>
+                        <span>alejandro.cifuentes.osorio@gmail.com</span>
+                    </div>
+                    <div class="info-contacto">
+                        <div class="icono-contacto"><i class="bi bi-telephone"></i></div>
+                        <span>+57 318 690 3650</span>
+                    </div>
+                    <div class="info-contacto">
+                        <div class="icono-contacto"><i class="bi bi-geo-alt"></i></div>
+                        <span>Colombia</span>
+                    </div>
+                </div>
+
+                <!-- Formulario manejado completamente con Vue (v-model, @submit) -->
+                <div class="col-md-7 fade-in">
+                    <form class="form-contacto" @submit.prevent="enviarFormulario" novalidate>
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label>Nombre</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    :class="{ 'input-error': errores.nombre, 'input-ok': validado.nombre }"
+                                    v-model="form.nombre"
+                                    @blur="validarCampo('nombre')"
+                                    placeholder="Tu nombre completo">
+                                <div class="error-vue" v-if="errores.nombre">{{ errores.nombre }}</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Correo electrónico</label>
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    :class="{ 'input-error': errores.correo, 'input-ok': validado.correo }"
+                                    v-model="form.correo"
+                                    @blur="validarCampo('correo')"
+                                    placeholder="tu@correo.com">
+                                <div class="error-vue" v-if="errores.correo">{{ errores.correo }}</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label>Asunto</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    :class="{ 'input-error': errores.asunto, 'input-ok': validado.asunto }"
+                                    v-model="form.asunto"
+                                    @blur="validarCampo('asunto')"
+                                    placeholder="¿De qué quieres hablar?">
+                                <div class="error-vue" v-if="errores.asunto">{{ errores.asunto }}</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label>Mensaje</label>
+                                <textarea
+                                    class="form-control"
+                                    rows="4"
+                                    :class="{ 'input-error': errores.mensaje, 'input-ok': validado.mensaje }"
+                                    v-model="form.mensaje"
+                                    @blur="validarCampo('mensaje')"
+                                    placeholder="Escribe tu mensaje aquí..."
+                                    maxlength="500">
+                                </textarea>
+                                <!-- Contador de caracteres reactivo -->
+                                <div class="char-contador" :class="{ limite: form.mensaje.length > 450 }">
+                                    {{ form.mensaje.length }} / 500 caracteres
+                                </div>
+                                <div class="error-vue" v-if="errores.mensaje">{{ errores.mensaje }}</div>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn-enviar" :disabled="enviando">
+                                    <i class="bi bi-send me-2"></i>
+                                    {{ enviando ? 'Enviando...' : 'Enviar mensaje' }}
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Alerta de exito controlada por Vue con v-if -->
+                        <div v-if="enviado" class="alerta-exito" style="display: flex;">
+                            <i class="bi bi-check-circle me-2"></i>
+                            ¡Mensaje enviado con éxito! Pronto me pondré en contacto contigo.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Portafolio personal &mdash; <span>Alejandro Cifuentes</span> &copy; 2026</p>
+        <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.6;">
+            Desarrollado con HTML, CSS, JavaScript, Bootstrap 5 y Vue.js 3
+        </p>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button id="btn-arriba" aria-label="Volver arriba">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                // Modo oscuro
+                modoOscuro: false,
+
+                // Estadisticas
+                stats: [
+                    { valor: 7,  etiqueta: 'Años de experiencia' },
+                    { valor: 3,  etiqueta: 'Proyectos destacados' },
+                    { valor: 5,  etiqueta: 'Tecnologías dominadas' }
+                ],
+
+                // Habilidades con barras de progreso
+                habilidades: [
+                    { nombre: 'Golang',       nivel: 90 },
+                    { nombre: 'Kotlin / Java', nivel: 85 },
+                    { nombre: 'Python',        nivel: 75 },
+                    { nombre: 'JavaScript',    nivel: 65 },
+                    { nombre: 'HTML & CSS',    nivel: 60 }
+                ],
+
+                // Tags de tecnologias
+                tags: ['HTML5','CSS3','JavaScript','Vue.js','Bootstrap 5','Python','Kotlin','Java','Golang','Git','SQL','REST APIs','Microservicios'],
+                tagSeleccionado: null,
+
+                // Proyectos
+                categorias: ['Todos', 'Web', 'Intranet', 'Salud'],
+                filtroActivo: 'Todos',
+                proyectos: [
+                    {
+                        id: 1,
+                        nombre: 'Disempack',
+                        imagen: 'disempack.jpeg',
+                        descripcion: 'Sitio web corporativo para empresa del sector de empaques y embalajes. Diseño limpio y navegación intuitiva.',
+                        categoria: 'Web',
+                        url: 'https://disempack.net/'
+                    },
+                    {
+                        id: 2,
+                        nombre: 'Asosuperfruver',
+                        imagen: 'asosuperfruver.jpeg',
+                        descripcion: 'Sistema de registro e inventario para cooperativa de venta de papa. Intranet con autenticación para gestionar inventarios y remisiones.',
+                        categoria: 'Intranet',
+                        url: 'https://asosuperfruverune.com/'
+                    },
+                    {
+                        id: 3,
+                        nombre: 'Telemed Group',
+                        imagen: 'telemed.jpeg',
+                        descripcion: 'Plataforma para administrar servicios de medicina y telemedicina en tres países de Sudamérica.',
+                        categoria: 'Salud',
+                        url: 'https://www.telemed-group.cl/'
+                    }
+                ],
+
+                // Formulario de contacto
+                form: {
+                    nombre:  '',
+                    correo:  '',
+                    asunto:  '',
+                    mensaje: ''
+                },
+                errores:  {},
+                validado: {},
+                enviando: false,
+                enviado:  false
+            };
+        },
+
+        // Propiedad computada: filtra proyectos segun la categoria activa
+        computed: {
+            proyectosFiltrados() {
+                if (this.filtroActivo === 'Todos') return this.proyectos;
+                return this.proyectos.filter(p => p.categoria === this.filtroActivo);
+            }
+        },
+
+        methods: {
+            // Seleccionar un tag de tecnologia
+            seleccionarTag(tag) {
+                this.tagSeleccionado = this.tagSeleccionado === tag ? null : tag;
+            },
+
+            // Descripcion de cada tecnologia al seleccionarla
+            descripcionTag(tag) {
+                const desc = {
+                    'HTML5':         'Lenguaje de marcado para estructurar el contenido web.',
+                    'CSS3':          'Hoja de estilos para diseñar la presentación visual.',
+                    'JavaScript':    'Lenguaje de programación para interactividad en el navegador.',
+                    'Vue.js':        'Framework progresivo de JavaScript para construir interfaces reactivas.',
+                    'Bootstrap 5':   'Framework CSS para diseño responsivo y componentes listos para usar.',
+                    'Python':        'Lenguaje versátil usado para scripts, APIs y análisis de datos.',
+                    'Kotlin':        'Lenguaje moderno para desarrollo Android y backend en la JVM.',
+                    'Java':          'Lenguaje robusto ampliamente usado en aplicaciones empresariales.',
+                    'Golang':        'Lenguaje compilado de Google, ideal para servicios de alto rendimiento.',
+                    'Git':           'Sistema de control de versiones para gestionar el historial del código.',
+                    'SQL':           'Lenguaje para consultar y gestionar bases de datos relacionales.',
+                    'REST APIs':     'Arquitectura para comunicar servicios web mediante HTTP.',
+                    'Microservicios':'Patrón de arquitectura que divide una aplicación en servicios independientes.'
+                };
+                return desc[tag] || '';
+            },
+
+            // Validacion de un campo individual al perder el foco
+            validarCampo(campo) {
+                const valor = this.form[campo].trim();
+                delete this.errores[campo];
+                delete this.validado[campo];
+
+                if (campo === 'nombre') {
+                    if (valor.length < 2) this.errores.nombre = 'El nombre debe tener al menos 2 caracteres.';
+                    else this.validado.nombre = true;
+                }
+                if (campo === 'correo') {
+                    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!re.test(valor)) this.errores.correo = 'Ingresa un correo electrónico válido.';
+                    else this.validado.correo = true;
+                }
+                if (campo === 'asunto') {
+                    if (valor.length < 3) this.errores.asunto = 'El asunto debe tener al menos 3 caracteres.';
+                    else this.validado.asunto = true;
+                }
+                if (campo === 'mensaje') {
+                    if (valor.length < 10) this.errores.mensaje = 'El mensaje debe tener al menos 10 caracteres.';
+                    else this.validado.mensaje = true;
+                }
+
+                this.errores  = { ...this.errores };
+                this.validado = { ...this.validado };
+            },
+
+            // Envio del formulario
+            enviarFormulario() {
+                ['nombre','correo','asunto','mensaje'].forEach(c => this.validarCampo(c));
+                if (Object.keys(this.errores).length > 0) return;
+
+                this.enviando = true;
+                setTimeout(() => {
+                    this.enviando = false;
+                    this.enviado  = true;
+                    this.form     = { nombre: '', correo: '', asunto: '', mensaje: '' };
+                    this.errores  = {};
+                    this.validado = {};
+                    setTimeout(() => { this.enviado = false; }, 5000);
+                }, 1200);
+            }
+        },
+
+        // Ciclo de vida: activar barras de progreso despues de montar
+        mounted() {
+            const activarBarras = () => {
+                document.querySelectorAll('.progress-bar[data-width]').forEach(b => {
+                    b.style.width = b.getAttribute('data-width') + '%';
+                });
+            };
+            setTimeout(activarBarras, 400);
+        }
+
+    }).mount('#app');
+    </script>
+
+</body>
+</html>
