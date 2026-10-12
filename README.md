@@ -1,6 +1,8 @@
-# Desarrollo Frontend - Alejandro Cifuentes
+# Desarrollo Front-end - Alejandro Cifuentes Osorio
 
-Proyecto del modulo de Desarrollo de Front-end - Politecnico Grancolombiano 2026.
+Modulo: Desarrollo de Front-end
+Institucion: Politecnico Grancolombiano
+Ano: 2026
 
 ---
 
@@ -8,142 +10,254 @@ Proyecto del modulo de Desarrollo de Front-end - Politecnico Grancolombiano 2026
 
 ```
 frontend/
-├── entrega_1_Alejandro_Cifuentes.html   # Entrega previa 1 (semana 3)
-├── entrega_2_Alejandro_Cifuentes.html   # Entrega previa 2 (semana 5)
-├── styles.css                           # Estilos CSS entrega 2
-├── script.js                            # JavaScript entrega 2
-├── alejandro_cifuentes.jpeg
-├── disempack.jpeg
-├── asosuperfruver.jpeg
-├── telemed.jpeg
-├── boca-mejoras/                        # Paginas standalone Boca (semana 7)
-│   ├── index.html                       # Login mejorado
-│   ├── admin/
-│   │   ├── dashboard.html
-│   │   ├── usuarios.html
-│   │   ├── competencias.html
-│   │   └── problemas.html
-│   ├── css/boca-theme.css
-│   └── js/boca-theme.js
-└── boca-integracion/                    # Archivos integrados a Boca real (semana 7)
-    └── src/
-        ├── index.php                    # Login de Boca reemplazado
-        ├── boca-theme.css               # Tema CSS
-        ├── boca-theme.js                # JavaScript del tema
-        └── admin/
-            └── header.php              # Header admin de Boca reemplazado
+|
+|-- entrega_1_Alejandro_Cifuentes.html
+|-- entrega_2_Alejandro_Cifuentes.html
+|-- styles.css
+|-- script.js
+|-- alejandro_cifuentes.jpeg
+|-- disempack.jpeg
+|-- asosuperfruver.jpeg
+|-- telemed.jpeg
+|
+|-- boca-mejoras/
+|   |-- index.html
+|   |-- css/
+|   |   `-- boca-theme.css
+|   |-- js/
+|   |   `-- boca-theme.js
+|   `-- admin/
+|       |-- dashboard.html
+|       |-- usuarios.html
+|       |-- competencias.html
+|       `-- problemas.html
+|
+`-- boca-integracion/
+    `-- src/
+        |-- index.php
+        |-- boca-theme.css
+        |-- boca-theme.js
+        `-- admin/
+            `-- header.php
 ```
 
 ---
 
 ## Entrega previa 1 - Semana 3
 
-Portafolio personal en un solo archivo HTML con CSS interno.
+Portafolio personal en un solo archivo HTML con CSS escrito dentro del mismo archivo.
 
-Contenido: navbar, presentacion, sobre mi, habilidades, proyectos y contacto.
+Secciones incluidas:
+- Barra de navegacion con anclas a cada seccion
+- Presentacion con foto de perfil
+- Sobre mi
+- Habilidades con etiquetas visuales
+- Proyectos con imagen, descripcion y enlace
+- Contacto con correo y telefono
+- Footer
 
 Tecnologias: HTML5, CSS3 interno.
+
+Para visualizar: abrir `entrega_1_Alejandro_Cifuentes.html` en el navegador.
 
 ---
 
 ## Entrega previa 2 - Semana 5
 
-Version mejorada del portafolio con archivos separados y frameworks.
+Version mejorada del portafolio separando el CSS y el JavaScript en archivos externos e integrando Bootstrap 5.
 
-Cambios principales:
-- CSS y JavaScript movidos a archivos externos
-- Bootstrap 5.3.2 para diseno responsivo
-- Bootstrap Icons para iconografia
-- Navbar fija con menu hamburguesa para movil
-- Barras de progreso animadas en habilidades
-- Contadores numericos animados
-- Formulario de contacto con validacion JavaScript campo por campo
-- Animaciones fade-in con IntersectionObserver
-- Boton volver arriba
+Archivos: `entrega_2_Alejandro_Cifuentes.html`, `styles.css`, `script.js`.
 
-Tecnologias: HTML5, CSS3, JavaScript ES6, Bootstrap 5, Bootstrap Icons.
+Cambios respecto a la entrega 1:
+
+- CSS separado en archivo externo `styles.css`
+- JavaScript separado en archivo externo `script.js`
+- Bootstrap 5.3.2 para grilla responsiva y componentes
+- Bootstrap Icons para iconos en toda la pagina
+- Navbar fija con menu hamburguesa para pantallas pequenas
+- Seccion hero con gradiente y animaciones de entrada
+- Datos personales organizados en tarjetas con icono
+- Barras de progreso de habilidades que se animan al hacer scroll
+- Contadores numericos animados (anos de experiencia, proyectos, tecnologias)
+- Grilla de 3 columnas para proyectos con efecto hover
+- Formulario de contacto con validacion JavaScript por campo
+- Animaciones fade-in usando IntersectionObserver
+- Boton de volver arriba que aparece al bajar en la pagina
+
+Para visualizar: abrir `entrega_2_Alejandro_Cifuentes.html` en el navegador. No requiere servidor.
+
+Tecnologias usadas:
+- HTML5
+- CSS3 (archivo externo)
+- JavaScript ES6 (archivo externo)
+- Bootstrap 5.3.2 via CDN
+- Bootstrap Icons 1.11.3 via CDN
 
 ---
 
 ## Entrega final - Semana 7
 
-Mejora de la interfaz del software BOCA (Online Contest Administrator) integrada al sistema real corriendo en Ubuntu 25.10 via VirtualBox.
+Mejora de la interfaz del software BOCA (Online Contest Administrator), implementada en dos partes: paginas standalone para visualizacion sin servidor, y la integracion real dentro del codigo fuente de Boca corriendo en Ubuntu 25.10 sobre VirtualBox.
 
-### Paginas standalone (boca-mejoras/)
+### Parte 1 - Paginas standalone (carpeta boca-mejoras/)
 
-Paginas HTML/CSS/JS que muestran el diseno mejorado sin necesidad de tener Boca instalado.
+Paginas HTML/CSS/JS que muestran el rediseno de la interfaz de Boca sin necesidad de tener el software instalado.
 
-- `index.html` - Login moderno con validacion
-- `admin/dashboard.html` - Panel con stats, scoreboard en vivo y ultimos envios
-- `admin/usuarios.html` - CRUD de usuarios con busqueda, filtros y modales
-- `admin/competencias.html` - CRUD de competencias con validacion de fechas
-- `admin/problemas.html` - CRUD de problemas con filtro por competencia
+Paginas creadas:
 
-### Integracion real (boca-integracion/)
+**index.html - Login**
+- Tarjeta de login centrada sobre fondo degradado
+- Campos de usuario y contrasena con iconos
+- Selector de tipo de acceso (administrador, juez, equipo, staff)
+- Validacion de campos con mensajes de error
+- Mensaje de credenciales incorrectas
 
-Archivos PHP de Boca modificados para usar el tema mejorado.
+**admin/dashboard.html - Panel principal**
+- Barra lateral fija con navegacion categorizada
+- Barra superior con nombre de usuario y reloj
+- Tarjetas de estadisticas (usuarios, competencias, problemas, envios)
+- Tabla de ultimos envios con resultado por colores
+- Scoreboard en vivo de la competencia activa
+- Barra de progreso de tiempo transcurrido en la competencia
 
-- `src/index.php` - Login de Boca reemplazado con diseno moderno
-- `src/admin/header.php` - Navegacion reemplazada con sidebar + topbar
-- `src/boca-theme.css` - Hoja de estilos del tema
-- `src/boca-theme.js` - JavaScript compartido
+**admin/usuarios.html - Gestion de usuarios**
+- Tabla con todos los usuarios registrados
+- Busqueda en tiempo real por texto
+- Filtro por tipo de usuario (administrador, juez, equipo, staff)
+- Modal para crear usuario con validacion de contrasenas
+- Boton de editar y eliminar con confirmacion
 
-Mejoras implementadas en Boca:
-- Login con tarjeta centrada, iconos y mensaje de error integrado
-- Sidebar fija con navegacion categorizada y enlace activo segun pagina
-- Topbar con nombre de usuario, sitio, reloj de competencia y boton de salida
-- Diseno responsivo con variables CSS
-- Tipografia y paleta de colores consistentes en todas las paginas admin
+**admin/competencias.html - Gestion de competencias**
+- Tabla de competencias con estado (en curso, programada, finalizada)
+- Modal para crear competencia con validacion de fechas
+- Verificacion de que la fecha de fin sea posterior al inicio
 
-### Instrucciones para instalar y correr Boca
+**admin/problemas.html - Gestion de problemas**
+- Tabla de problemas con letra identificadora, limite de tiempo, memoria y porcentaje de acierto
+- Filtro por competencia
+- Modal para cargar problema con archivo PDF y casos de prueba ZIP
 
-Requisitos: Ubuntu 22.04+ o 25.10, Apache2, PHP 8.x FPM, PostgreSQL.
+Funcionalidades JavaScript compartidas (boca-theme.js):
+- Apertura y cierre de modales con animacion
+- Validacion de formularios con marcado por campo
+- Notificaciones toast en la esquina inferior derecha
+- Busqueda en tiempo real sobre tablas
+- Dialogo de confirmacion para eliminar registros
+- Filtro por columna usando select
+
+### Parte 2 - Integracion real en Boca (carpeta boca-integracion/)
+
+Archivos PHP de Boca modificados para incorporar el tema mejorado dentro del sistema real.
+
+**src/index.php**
+
+Reemplaza el login original de Boca (tabla HTML centrada sin estilos) por:
+- Diseno con tarjeta centrada sobre fondo degradado oscuro
+- Campos con iconos usando Bootstrap Icons via CDN
+- Mensaje de error integrado en la pagina en lugar de alert() del navegador
+- Toda la logica PHP original conservada: sesion, cookies, hash de contrasena, redireccion por tipo de usuario
+
+**src/admin/header.php**
+
+Reemplaza la navegacion original (tabla horizontal amarilla) por:
+- Sidebar fija a la izquierda con logo, secciones y enlaces
+- Enlace activo resaltado segun la pagina actual (detectado con basename())
+- Topbar fija en la parte superior con titulo de pagina, reloj de la competencia, nombre de usuario y boton de salida
+- El contenido de cada pagina admin carga dentro de un div con los estilos del tema
+
+**src/boca-theme.css y src/boca-theme.js**
+
+Los mismos archivos de las paginas standalone, copiados al directorio de Boca para que los PHP puedan referenciarlos.
+
+---
+
+## Instrucciones para instalar y correr Boca con el tema aplicado
+
+Sistema operativo requerido: Ubuntu 22.04 o superior (probado en Ubuntu 25.10).
+Puede correrse en VirtualBox desde cualquier sistema operativo anfitrion.
+
+### 1. Instalar dependencias
 
 ```bash
-# 1. Instalar dependencias
-sudo apt update
-sudo apt install -y apache2 php8.5-fpm php8.5-pgsql php8.5-mbstring postgresql postgresql-client make wget makepasswd
-sudo a2enmod proxy_fcgi setenvif && sudo a2enconf php8.5-fpm
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y apache2 php8.5-fpm php8.5-pgsql php8.5-mbstring \
+  postgresql postgresql-client make wget unzip makepasswd
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php8.5-fpm
+sudo systemctl restart apache2
+```
 
-# 2. Descargar Boca
+### 2. Descargar e instalar Boca
+
+```bash
+cd ~
 wget https://github.com/cassiopc/boca/archive/refs/heads/master.zip -O boca.zip
-unzip boca.zip && cd boca-master
-
-# 3. Instalar Boca
+unzip boca.zip
+cd boca-master
 sudo make install-bocawww install-bocaapache install-bocadb install-bocacommon
-sudo a2dissite 000-default && sudo a2ensite 000-boca
+```
+
+### 3. Configurar Apache
+
+```bash
+sudo a2dissite 000-default
+sudo a2ensite 000-boca
+sudo systemctl reload apache2
+```
+
+### 4. Configurar la base de datos
+
+```bash
+sudo -u postgres psql -c "ALTER USER bocauser WITH PASSWORD 'boca2026';"
 sudo PASSWD='boca2026' boca-config-dbhost localhost
 printf 'YES\n' | sudo boca-createdb
-sudo systemctl restart apache2
+```
 
-# 4. Crear usuario admin
+### 5. Crear el usuario administrador
+
+```bash
 HASH=$(php -r "echo hash('sha256', 'boca2026');")
 sudo -u postgres psql bocadb -c "
-INSERT INTO usertable (contestnumber, usersitenumber, usernumber, username, userfullname, userdesc, usertype, userenabled, usermultilogin, userpassword, updatetime)
-VALUES (0, 1, 2, 'admin', 'Administrador', 'Admin principal', 'admin', true, false, '$HASH', EXTRACT(EPOCH FROM NOW())::bigint);"
+INSERT INTO usertable
+  (contestnumber, usersitenumber, usernumber, username, userfullname,
+   userdesc, usertype, userenabled, usermultilogin, userpassword, updatetime)
+VALUES
+  (0, 1, 2, 'admin', 'Administrador', 'Admin principal',
+   'admin', true, false, '$HASH', EXTRACT(EPOCH FROM NOW())::bigint);"
+```
 
-# 5. Aplicar tema mejorado
+### 6. Aplicar el tema mejorado
+
+Copiar los archivos de la carpeta `boca-integracion/src/` al servidor:
+
+```bash
 sudo cp boca-theme.css /var/www/boca/src/
 sudo cp boca-theme.js /var/www/boca/src/
-sudo cp src/index.php /var/www/boca/src/index.php
-sudo cp src/admin/header.php /var/www/boca/src/admin/header.php
+sudo cp index.php /var/www/boca/src/index.php
+sudo cp admin/header.php /var/www/boca/src/admin/header.php
 sudo chown -R www-data:www-data /var/www/boca/src/
 sudo systemctl reload apache2
 ```
 
-Acceso: `http://IP-DEL-SERVIDOR/boca/`
+### 7. Acceder al sistema
+
+Abrir en el navegador: `http://IP-DEL-SERVIDOR/boca/`
+
+Credenciales:
 - Usuario: `admin`
 - Contrasena: `boca2026`
 
 ---
 
-## Tecnologias usadas en la entrega final
+## Tecnologias usadas
 
-- HTML5, CSS3, JavaScript ES6
-- Bootstrap Icons 1.11.3 (via CDN)
-- PHP 8.5 (integracion con Boca)
-- PostgreSQL 18 (base de datos de Boca)
-- Apache2 con PHP-FPM
+- HTML5
+- CSS3 con variables, flexbox y grid
+- JavaScript ES6 con IntersectionObserver y manipulacion del DOM
+- Bootstrap Icons 1.11.3
+- PHP 8.5
+- PostgreSQL 18
+- Apache 2 con PHP-FPM
 - Ubuntu 25.10 en VirtualBox
 
 ---
