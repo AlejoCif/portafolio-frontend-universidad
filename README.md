@@ -1,6 +1,6 @@
-# Portafolio Personal - Alejandro Cifuentes
+# Desarrollo Frontend - Alejandro Cifuentes
 
-Proyecto de portafolio personal desarrollado para el curso de Frontend de la universidad.
+Proyecto del modulo de Desarrollo de Front-end - Politecnico Grancolombiano 2026.
 
 ---
 
@@ -8,85 +8,147 @@ Proyecto de portafolio personal desarrollado para el curso de Frontend de la uni
 
 ```
 frontend/
-├── entrega_1_Alejandro_Cifuentes.html   # Entrega 1
-├── entrega_2_Alejandro_Cifuentes.html   # Entrega 2
-├── styles.css                           # Estilos CSS externos
-├── script.js                            # JavaScript externo
-├── alejandro_cifuentes.jpeg             # Foto de perfil
-├── disempack.jpeg                       # Imagen proyecto 1
-├── asosuperfruver.jpeg                  # Imagen proyecto 2
-└── telemed.jpeg                         # Imagen proyecto 3
+├── entrega_1_Alejandro_Cifuentes.html   # Entrega previa 1 (semana 3)
+├── entrega_2_Alejandro_Cifuentes.html   # Entrega previa 2 (semana 5)
+├── styles.css                           # Estilos CSS entrega 2
+├── script.js                            # JavaScript entrega 2
+├── alejandro_cifuentes.jpeg
+├── disempack.jpeg
+├── asosuperfruver.jpeg
+├── telemed.jpeg
+├── boca-mejoras/                        # Paginas standalone Boca (semana 7)
+│   ├── index.html                       # Login mejorado
+│   ├── admin/
+│   │   ├── dashboard.html
+│   │   ├── usuarios.html
+│   │   ├── competencias.html
+│   │   └── problemas.html
+│   ├── css/boca-theme.css
+│   └── js/boca-theme.js
+└── boca-integracion/                    # Archivos integrados a Boca real (semana 7)
+    └── src/
+        ├── index.php                    # Login de Boca reemplazado
+        ├── boca-theme.css               # Tema CSS
+        ├── boca-theme.js                # JavaScript del tema
+        └── admin/
+            └── header.php              # Header admin de Boca reemplazado
 ```
 
 ---
 
-## Entrega 1
+## Entrega previa 1 - Semana 3
 
-Portafolio de una sola pagina en HTML con estilos CSS internos (dentro del mismo archivo).
+Portafolio personal en un solo archivo HTML con CSS interno.
 
-Contenido:
-- Barra de navegacion con enlaces a cada seccion
-- Seccion de inicio con foto y presentacion
-- Seccion sobre mi
-- Seccion de habilidades con etiquetas
-- Seccion de proyectos con tarjetas e imagenes
-- Seccion de contacto
-- Footer
+Contenido: navbar, presentacion, sobre mi, habilidades, proyectos y contacto.
 
-Tecnologias usadas:
-- HTML5
-- CSS3 (interno en el archivo HTML)
+Tecnologias: HTML5, CSS3 interno.
 
 ---
 
-## Entrega 2
+## Entrega previa 2 - Semana 5
 
-Version mejorada del portafolio con separacion de archivos y uso de frameworks y JavaScript.
+Version mejorada del portafolio con archivos separados y frameworks.
 
-### Cambios respecto a la entrega 1
-
-- CSS movido a archivo externo `styles.css`
-- JavaScript movido a archivo externo `script.js`
-- Integracion de Bootstrap 5 para diseno responsivo
-- Integracion de Bootstrap Icons para iconografia
+Cambios principales:
+- CSS y JavaScript movidos a archivos externos
+- Bootstrap 5.3.2 para diseno responsivo
+- Bootstrap Icons para iconografia
 - Navbar fija con menu hamburguesa para movil
-- Seccion hero con gradiente y animacion de entrada
-- Seccion sobre mi con datos personales en tarjetas y contadores animados
-- Seccion de habilidades con barras de progreso animadas y etiquetas de tecnologias
-- Seccion de proyectos en grilla de 3 columnas con hover effects
-- Seccion de contacto con formulario validado por JavaScript
-- Boton de volver arriba que aparece al hacer scroll
-- Animaciones fade-in al entrar al viewport
-
-### Funcionalidades JavaScript
-
-- Navbar: resalta el enlace de la seccion visible al hacer scroll
-- Cierre automatico del menu movil al seleccionar un enlace
-- Animaciones fade-in usando IntersectionObserver
-- Barras de progreso que se activan al llegar a la seccion
+- Barras de progreso animadas en habilidades
 - Contadores numericos animados
-- Validacion de formulario de contacto campo por campo
-- Boton volver arriba con aparicion y ocultamiento segun scroll
+- Formulario de contacto con validacion JavaScript campo por campo
+- Animaciones fade-in con IntersectionObserver
+- Boton volver arriba
 
-### Tecnologias usadas
-
-- HTML5
-- CSS3 (archivo externo)
-- JavaScript ES6 (archivo externo)
-- Bootstrap 5.3.2 (framework CSS/JS via CDN)
-- Bootstrap Icons 1.11.3 (via CDN)
+Tecnologias: HTML5, CSS3, JavaScript ES6, Bootstrap 5, Bootstrap Icons.
 
 ---
 
-## Como visualizar
+## Entrega final - Semana 7
 
-Abrir el archivo `entrega_2_Alejandro_Cifuentes.html` directamente en cualquier navegador web. No requiere instalacion de software adicional.
+Mejora de la interfaz del software BOCA (Online Contest Administrator) integrada al sistema real corriendo en Ubuntu 25.10 via VirtualBox.
 
-Para la entrega 1 abrir `entrega_1_Alejandro_Cifuentes.html`.
+### Paginas standalone (boca-mejoras/)
+
+Paginas HTML/CSS/JS que muestran el diseno mejorado sin necesidad de tener Boca instalado.
+
+- `index.html` - Login moderno con validacion
+- `admin/dashboard.html` - Panel con stats, scoreboard en vivo y ultimos envios
+- `admin/usuarios.html` - CRUD de usuarios con busqueda, filtros y modales
+- `admin/competencias.html` - CRUD de competencias con validacion de fechas
+- `admin/problemas.html` - CRUD de problemas con filtro por competencia
+
+### Integracion real (boca-integracion/)
+
+Archivos PHP de Boca modificados para usar el tema mejorado.
+
+- `src/index.php` - Login de Boca reemplazado con diseno moderno
+- `src/admin/header.php` - Navegacion reemplazada con sidebar + topbar
+- `src/boca-theme.css` - Hoja de estilos del tema
+- `src/boca-theme.js` - JavaScript compartido
+
+Mejoras implementadas en Boca:
+- Login con tarjeta centrada, iconos y mensaje de error integrado
+- Sidebar fija con navegacion categorizada y enlace activo segun pagina
+- Topbar con nombre de usuario, sitio, reloj de competencia y boton de salida
+- Diseno responsivo con variables CSS
+- Tipografia y paleta de colores consistentes en todas las paginas admin
+
+### Instrucciones para instalar y correr Boca
+
+Requisitos: Ubuntu 22.04+ o 25.10, Apache2, PHP 8.x FPM, PostgreSQL.
+
+```bash
+# 1. Instalar dependencias
+sudo apt update
+sudo apt install -y apache2 php8.5-fpm php8.5-pgsql php8.5-mbstring postgresql postgresql-client make wget makepasswd
+sudo a2enmod proxy_fcgi setenvif && sudo a2enconf php8.5-fpm
+
+# 2. Descargar Boca
+wget https://github.com/cassiopc/boca/archive/refs/heads/master.zip -O boca.zip
+unzip boca.zip && cd boca-master
+
+# 3. Instalar Boca
+sudo make install-bocawww install-bocaapache install-bocadb install-bocacommon
+sudo a2dissite 000-default && sudo a2ensite 000-boca
+sudo PASSWD='boca2026' boca-config-dbhost localhost
+printf 'YES\n' | sudo boca-createdb
+sudo systemctl restart apache2
+
+# 4. Crear usuario admin
+HASH=$(php -r "echo hash('sha256', 'boca2026');")
+sudo -u postgres psql bocadb -c "
+INSERT INTO usertable (contestnumber, usersitenumber, usernumber, username, userfullname, userdesc, usertype, userenabled, usermultilogin, userpassword, updatetime)
+VALUES (0, 1, 2, 'admin', 'Administrador', 'Admin principal', 'admin', true, false, '$HASH', EXTRACT(EPOCH FROM NOW())::bigint);"
+
+# 5. Aplicar tema mejorado
+sudo cp boca-theme.css /var/www/boca/src/
+sudo cp boca-theme.js /var/www/boca/src/
+sudo cp src/index.php /var/www/boca/src/index.php
+sudo cp src/admin/header.php /var/www/boca/src/admin/header.php
+sudo chown -R www-data:www-data /var/www/boca/src/
+sudo systemctl reload apache2
+```
+
+Acceso: `http://IP-DEL-SERVIDOR/boca/`
+- Usuario: `admin`
+- Contrasena: `boca2026`
+
+---
+
+## Tecnologias usadas en la entrega final
+
+- HTML5, CSS3, JavaScript ES6
+- Bootstrap Icons 1.11.3 (via CDN)
+- PHP 8.5 (integracion con Boca)
+- PostgreSQL 18 (base de datos de Boca)
+- Apache2 con PHP-FPM
+- Ubuntu 25.10 en VirtualBox
 
 ---
 
 ## Autor
 
-Alejandro Cifuentes Osorio  
+Alejandro Cifuentes Osorio
 alejandro.cifuentes.osorio@gmail.com
