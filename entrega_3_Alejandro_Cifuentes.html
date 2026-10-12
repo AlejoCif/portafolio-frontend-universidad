@@ -161,16 +161,9 @@
             box-shadow: 0 6px 16px rgba(243,156,18,0.35);
         }
 
-        /*
-         * PREVENCION DE FLASH DE CONTENIDO SIN COMPILAR (FOUC)
-         * v-cloak oculta el div#app mientras Vue no ha terminado de montar.
-         * Vue elimina automaticamente el atributo v-cloak cuando termina,
-         * lo que hace visible el contenido ya procesado.
-         */
-        [v-cloak] { display: none; }
-
         /* El div#app debe cubrir toda la altura de la pagina para que
-           el fondo del modo oscuro no deje areas sin color. */
+           el fondo del modo oscuro no deje areas sin color.
+           La clase modo-oscuro la agrega/quita el watch de Vue via this.$el. */
         #app {
             min-height: 100vh;
         }
@@ -235,10 +228,11 @@
     PUNTO DE MONTAJE DE VUE
     Todo el contenido del portafolio vive dentro de este div.
     Vue 3 se monta aqui con createApp({...}).mount('#app').
-    La directiva :class aplica o quita "modo-oscuro" segun el estado de modoOscuro,
-    y v-cloak oculta el div hasta que Vue termina de compilar la plantilla.
+    Nota: Vue no procesa directivas reactivas (:class, v-model, etc.) en el elemento
+    contenedor del mount — solo controla sus hijos. Por eso el modo oscuro se aplica
+    mediante un watch que llama this.$el.classList.toggle() directamente.
 -->
-<div id="app" v-cloak :class="{ 'modo-oscuro': modoOscuro }">
+<div id="app">
 
     <!--
         NAVBAR — Bootstrap + Vue
@@ -817,6 +811,20 @@
                     this.validado = {};
                     setTimeout(() => { this.enviado = false; }, 5000);
                 }, 1200);
+            }
+        },
+
+        /*
+         * watch — observadores de estado
+         * Vue llama al handler cada vez que cambia la propiedad observada.
+         * Se usa aqui porque :class en el elemento raiz donde Vue se monta (#app)
+         * no es procesado de forma reactiva por Vue (ese elemento es el contenedor
+         * del mount, no un nodo del VDOM). El watch aplica la clase manualmente
+         * sobre this.$el (referencia al div#app) cuando modoOscuro cambia.
+         */
+        watch: {
+            modoOscuro(val) {
+                this.$el.classList.toggle('modo-oscuro', val);
             }
         },
 
