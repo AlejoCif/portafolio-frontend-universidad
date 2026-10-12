@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOCA - Competencias</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/boca-theme.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo-icon">B</div>
+            <div><span>BOCA</span><small>Panel de administracion</small></div>
+        </div>
+        <div class="sidebar-section">Principal</div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+        </nav>
+        <div class="sidebar-section">Gestion</div>
+        <nav class="sidebar-nav">
+            <a href="usuarios.html"><i class="bi bi-people"></i> Usuarios</a>
+            <a href="competencias.html" class="active"><i class="bi bi-trophy"></i> Competencias</a>
+            <a href="problemas.html"><i class="bi bi-file-code"></i> Problemas</a>
+        </nav>
+        <div class="sidebar-section">Sistema</div>
+        <nav class="sidebar-nav">
+            <a href="../index.html"><i class="bi bi-box-arrow-left"></i> Cerrar sesion</a>
+        </nav>
+        <div class="sidebar-footer">BOCA v3.x &mdash; Poli Grancolombiano</div>
+    </aside>
+
+    <div class="main-content">
+        <div class="topbar">
+            <span class="topbar-title">Gestion de competencias</span>
+            <div class="topbar-right">
+                <div class="topbar-user"><div class="avatar">A</div><span>Admin</span></div>
+                <a href="../index.html" class="btn-logout">
+                    <i class="bi bi-box-arrow-right"></i> Salir
+                </a>
+            </div>
+        </div>
+
+        <div class="page-body">
+
+            <div class="grid-3 mb-6">
+                <div class="stat-card">
+                    <div class="stat-icon naranja"><i class="bi bi-trophy"></i></div>
+                    <div class="stat-info"><div class="numero">3</div><div class="etiqueta">Total competencias</div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon verde"><i class="bi bi-play-circle"></i></div>
+                    <div class="stat-info"><div class="numero">1</div><div class="etiqueta">En curso</div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon azul"><i class="bi bi-calendar-check"></i></div>
+                    <div class="stat-info"><div class="numero">2</div><div class="etiqueta">Programadas</div></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h2><i class="bi bi-trophy"></i> Competencias</h2>
+                    <div class="filtros">
+                        <div class="search-box">
+                            <i class="bi bi-search"></i>
+                            <input type="text" id="buscar-comp" class="form-control" placeholder="Buscar...">
+                        </div>
+                        <select id="filtro-estado" class="select-filtro">
+                            <option value="">Todos los estados</option>
+                            <option value="en curso">En curso</option>
+                            <option value="programada">Programada</option>
+                            <option value="finalizada">Finalizada</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="abrirModal('modal-competencia')">
+                            <i class="bi bi-plus-lg"></i> Nueva competencia
+                        </button>
+                    </div>
+                </div>
+
+                <table class="tabla" id="tabla-competencias">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Inicio</th>
+                            <th>Fin</th>
+                            <th>Equipos</th>
+                            <th>Problemas</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td class="fw-600">ICPC Regional 2026</td>
+                            <td>10/10/2026 09:00</td>
+                            <td>10/10/2026 14:00</td>
+                            <td style="text-align:center;">8</td>
+                            <td style="text-align:center;">6</td>
+                            <td><span class="badge badge-verde">En curso</span></td>
+                            <td>
+                                <button class="btn btn-outline btn-sm" onclick="editarComp(1)"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-outline btn-sm" style="color:var(--success);border-color:rgba(39,174,96,0.3);" title="Ver scoreboard">
+                                    <i class="bi bi-bar-chart-line"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="fw-600">Copa Poli 2026</td>
+                            <td>25/10/2026 08:00</td>
+                            <td>25/10/2026 13:00</td>
+                            <td style="text-align:center;">12</td>
+                            <td style="text-align:center;">8</td>
+                            <td><span class="badge badge-azul">Programada</span></td>
+                            <td>
+                                <button class="btn btn-outline btn-sm" onclick="editarComp(2)"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-danger btn-sm" onclick="eliminarComp(2, 'Copa Poli 2026')"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td class="fw-600">Practica Interna Sept</td>
+                            <td>20/09/2026 10:00</td>
+                            <td>20/09/2026 12:00</td>
+                            <td style="text-align:center;">6</td>
+                            <td style="text-align:center;">4</td>
+                            <td><span class="badge badge-gris">Finalizada</span></td>
+                            <td>
+                                <button class="btn btn-outline btn-sm" onclick="editarComp(3)"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-outline btn-sm" style="color:var(--success);border-color:rgba(39,174,96,0.3);" title="Ver scoreboard">
+                                    <i class="bi bi-bar-chart-line"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL COMPETENCIA -->
+    <div class="modal-overlay" id="modal-competencia">
+        <div class="modal-box" style="max-width:560px;">
+            <div class="modal-header">
+                <h3 id="modal-comp-titulo">Nueva competencia</h3>
+                <button class="modal-close" onclick="cerrarModal('modal-competencia')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-competencia" novalidate>
+                    <div class="form-group">
+                        <label for="c-nombre">Nombre de la competencia</label>
+                        <input type="text" id="c-nombre" class="form-control"
+                               placeholder="ej: ICPC Regional 2026" data-min="3">
+                        <div class="form-error"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="c-inicio">Fecha y hora de inicio</label>
+                            <input type="datetime-local" id="c-inicio" class="form-control" data-requerido>
+                            <div class="form-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c-fin">Fecha y hora de fin</label>
+                            <input type="datetime-local" id="c-fin" class="form-control" data-requerido>
+                            <div class="form-error"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="c-penalizacion">Penalizacion (minutos)</label>
+                            <input type="number" id="c-penalizacion" class="form-control"
+                                   placeholder="20" min="0" value="20">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-max-equipos">Maximo de equipos</label>
+                            <input type="number" id="c-max-equipos" class="form-control"
+                                   placeholder="Sin limite" min="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-descripcion">Descripcion (opcional)</label>
+                        <textarea id="c-descripcion" class="form-control" rows="3"
+                                  placeholder="Descripcion de la competencia..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="cerrarModal('modal-competencia')">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarCompetencia()">
+                    <i class="bi bi-check2"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRMAR -->
+    <div class="modal-overlay" id="modal-confirmar">
+        <div class="modal-box" style="max-width:380px;">
+            <div class="modal-header">
+                <h3>Confirmar eliminacion</h3>
+                <button class="modal-close" onclick="cerrarModal('modal-confirmar')">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align:center; padding:28px;">
+                <div style="font-size:2.5rem; color:var(--danger); margin-bottom:12px;">
+                    <i class="bi bi-exclamation-triangle"></i>
+                </div>
+                <p style="font-size:0.9rem;">
+                    Esta seguro de eliminar la competencia <strong id="confirmar-nombre"></strong>?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="cerrarModal('modal-confirmar')">Cancelar</button>
+                <button class="btn btn-danger" id="btn-confirmar-eliminar" style="background:var(--danger);color:#fff;">
+                    <i class="bi bi-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container"></div>
+
+    <script src="../js/boca-theme.js"></script>
+    <script>
+        filtrarTabla('buscar-comp', 'tabla-competencias');
+        filtrarPorSelect('filtro-estado', 'tabla-competencias', 6);
+
+        function guardarCompetencia() {
+            if (!validarFormulario('form-competencia')) return;
+            const inicio = document.getElementById('c-inicio').value;
+            const fin    = document.getElementById('c-fin').value;
+            if (inicio && fin && new Date(fin) <= new Date(inicio)) {
+                const el = document.getElementById('c-fin');
+                el.classList.add('is-invalid');
+                el.nextElementSibling.style.display = 'block';
+                el.nextElementSibling.textContent = 'La fecha de fin debe ser posterior al inicio.';
+                return;
+            }
+            cerrarModal('modal-competencia');
+            mostrarToast('Competencia guardada correctamente.');
+        }
+
+        function editarComp(id) {
+            document.getElementById('modal-comp-titulo').textContent = 'Editar competencia';
+            abrirModal('modal-competencia');
+        }
+
+        function eliminarComp(id, nombre) {
+            confirmarEliminar(nombre, () => {
+                mostrarToast(`Competencia "${nombre}" eliminada.`, 'error');
+            });
+        }
+    </script>
+</body>
+</html>
